@@ -1,0 +1,54 @@
+
+You have one new message.
+
+Skip to content
+Using Gmail with screen readers
+Conversations
+Some generic notes
+Inbox
+CareerAndJobSearch/ContainsAnyKeywords
+CareerAndJobSearch/ContainsAWS
+CareerAndJobSearch/ContainsPython
+CareerAndJobSearch/x_HereTechnologies
+Bhirud, Nikhil <nikhil.bhirud@here.com>
+	
+AttachmentsNov 7, 2022, 5:24 AM
+	
+to me
+
+ 
+
+ 
+
+ 
+
+Warm Regards,
+
+Nikhil Bhirud
+
+ 
+ 8 Attachments  •  Scanned by Gmail
+	
+Inserted from:nikhil.bhirud@here.com.
+
+# On your local
+
+git checkout master
+
+# git reset --hard origin/master 
+
+git pull origin  master
+
+git checkout your-branch
+
+# git reset --hard origin/your-branch 
+# git pull origin your-branch
+
+git rebase origin/master
+
+git push origin your-branch
+
+# git push origin LG-2976 -f
+
+git rebase steps.txt
+Displaying kubernetes_docker_commands.md.

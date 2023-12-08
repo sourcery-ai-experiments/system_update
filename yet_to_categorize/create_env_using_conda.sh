@@ -12,7 +12,9 @@ conda install -n base conda-forge::mamba;
 mamba env create --file PROJECTPATH/conda-environment.py312.yml; 
 conda activate ENVNAME 
 
+# Useful when using spyder or vscode
+conda install ipykernel
+
+conda clean --tarballs;
+
 #####################
-
-
-conda activate LG-py3x; pip3 install --extra-index-url https://artifactory.in.here.com/artifactory/api/pypi/olp-dp-pypi/simple hak; conda clean --tarballs; 
