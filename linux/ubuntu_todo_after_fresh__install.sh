@@ -1,7 +1,6 @@
 
 
 ###########################################
-#############  STEP 1
 ###########################################
 
 # Open "Software and Updates" 
@@ -15,7 +14,6 @@
 # reboot
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Did basic research of bash vs zsh vs fish and felt like zsh was the right one for me. Also, fish isn't POSIX compliant. bash and zsh are mostly compatible with eash other, but fish isn't.
@@ -28,7 +26,6 @@ zsh
 
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Make terminal beautiful and productive
@@ -39,7 +36,6 @@ zsh
 # reboot
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Upgrade kernel
@@ -48,7 +44,6 @@ zsh
 # reboot
 
 ###########################################
-#############  STEP 2
 ###########################################
 
 sudo apt update -y && sudo apt upgrade -y
@@ -56,7 +51,6 @@ sudo apt update -y && sudo apt upgrade -y
 # reboot
 
 ###########################################
-#############  STEP 1
 ###########################################
 
 # App Center may have trouble updating snap-store. Do this instead:
@@ -68,21 +62,21 @@ sudo snap refresh # updates all snap apps
 # sudo snap refresh firefox # update a specific app
 
 ###########################################
-#############  STEP 4
 ###########################################
 
+# Refer this for latest instructions: https://flathub.org/setup/Ubuntu
 # Install flatpak and enable Flathub
 sudo apt install -y gnome-software-plugin-flatpak  flatpak
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+# flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+# https://flathub.org/
 flatpak update # Updates every outdated Flatpak package
 # reboot
 
-
 ###########################################
-#############  STEP 4
 ###########################################
 
-# Do this now because Firefox will be neeeded during the installing steps for general searching, version check, etc
+# Do this now because Firefox will be needed during the installing steps for general searching, version check, etc
 # remove snap firefox and install flatpak firefox
 
 sudo snap remove firefox
@@ -94,7 +88,6 @@ flatpak run org.mozilla.firefox
 # Login -> Let it stay open for a while as everything syncs and extensions install
 
 ###########################################
-#############  STEP 3
 ###########################################
 
 # Firmware updates using terminal:
@@ -105,7 +98,6 @@ sudo fwupdmgr update
 
 
 ###########################################
-#############  STEP 1
 ###########################################
 
 sudo ubuntu-drivers list
@@ -117,7 +109,6 @@ sudo ubuntu-drivers autoinstall # Installs all the recommended drivers
 # reboot
 
 ###########################################
-#############  STEP 3
 ###########################################
 
 # Open "Software Updater" -> Install if anything
@@ -126,14 +117,13 @@ sudo ubuntu-drivers autoinstall # Installs all the recommended drivers
 
 # Open "Software and Updates" -> "Additional Drivers" -> Choose and apply changes
 
-# Open "App Center" -> Manage -> "Check for Updates" -> "Update Alll"
+# Open "App Center" -> Manage -> "Check for Updates" -> "Update All"
 
 # Open "Software" app (flatpak/flathub app store) -> update tab -> Install if anything
 
 # reboot
 
 ###########################################
-#############  STEP 4
 ###########################################
 # Gnome extensions
 sudo apt install -y gnome-shell-extension-manager
@@ -148,7 +138,6 @@ sudo apt install -y gnome-browser-connector
 #    blur my shell
 
 ###########################################
-#############  STEP 3
 ###########################################
 
 # Find out the latest version first
@@ -162,7 +151,6 @@ sudo apt install -y python3.12
 
 
 ###########################################
-#############  STEP 3
 ###########################################
 
 # Install Java?
@@ -171,13 +159,12 @@ sudo apt install -y python3.12
 sudo apt install -y openjdk-22-jdk
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Install vscode
 # Documentation: https://code.visualstudio.com/docs/setup/linux 
 
- sudo apt-get install -y wget gpg
+sudo apt-get install -y wget gpg
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
@@ -188,7 +175,6 @@ sudo apt update
 sudo apt install -y code # or code-insiders
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Install jetbrains toolbox
@@ -200,7 +186,6 @@ sudo apt install -y code # or code-insiders
 
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Commonly used media codecs and fonts for Ubuntu
@@ -211,9 +196,10 @@ sudo apt install -y ubuntu-restricted-extras
 # Commonly used restricted packages for Ubuntu
 sudo apt install -y ubuntu-restricted-addons
 
+# Install some fonts
+sudo apt install fonts-jetbrains-mono
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Enable Advanced Window Tiling - not needed anymore in latest ubuntu
@@ -223,7 +209,6 @@ sudo apt install -y ubuntu-restricted-addons
 # Next step in Settings section explained below
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Install GNOME Tweaks
@@ -234,11 +219,11 @@ sudo apt install -y ubuntu-restricted-addons
 
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Install useful software
 
+sudo apt install -y unattended-upgrades # Configurations in settings section
 
 sudo apt install -y git
 sudo apt install -y htop
@@ -248,6 +233,9 @@ sudo apt install -y htop
 # Useful to check system info in cool way
 sudo apt install -y neofetch
 
+# Install tor browser
+sudo apt install tor torbrowser-launcher
+
 # Only for laptop - Improve Laptop Battery:
 # sudo apt install -y tlp tlp-rdw
 # sudo tlp start
@@ -255,7 +243,7 @@ sudo apt install -y neofetch
 
 # Install VLC 
 sudo apt install -y vlc
-# Can also nstall VLC from "Apps Center"
+# Can also install VLC from "Apps Center"
 # Remove the gnome video player to remove redundancy
 sudo apt remove totem
 
@@ -288,10 +276,6 @@ flatpak install -y flathub com.spotify.Client
 
 # Firewall
 sudo apt install -y ufw
-sudo systemctl enable ufw
-sudo systemctl start ufw
-# optionally do following instead of systemctl
-# sudo ufw enable
 
 # Run Windows applications on ubuntu - can use actual *.exe files
 flatpak install flathub com.usebottles.bottles
@@ -307,7 +291,6 @@ flatpak run com.usebottles.bottles
 
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Gaming
@@ -318,22 +301,15 @@ flatpak run com.usebottles.bottles
 # Steam -> Settings -> Steam Play -> Select the latest proton version from drop down
 
 
-###########################################
-#############  STEP 4
-###########################################
 
-Privacy 
-- disable diagnostic data, etc in OS as well as apps
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Enable "Minimize on Dock icon click"
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 ##### Settings
@@ -344,6 +320,8 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 # Network -> Click the gear box next to the connection in use -> IPV6 tab -> "Additional DNS servers" -> Paste the following in the box and apply:
 # 2001:4860:4860::8888, 2001:4860:4860::8844, 2606:4700:4700::1111, 2606:4700:4700::1001
 
+# Network -> Click the gear box next to the connection in use -> IPV6 tab -> "IPV6 Method" = Disabled (reduce attack surface area unless explicitly needed)
+
 # Appearance -> choose dark/light mode and background. Also choose color that matches the background
 
 # Ubuntu Desktop -> Desktop Icons -> Size = Small, Enable "Show Personal Folder"
@@ -353,7 +331,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 
 # Search -> Search Results -> Disable everything except Settings and Software
 
-# Privacy -> Screen Lock -> Adujst to liking, 
+# Privacy -> Screen Lock -> Adjust to liking,
 # Privacy -> disable "Location Services"
 # Privacy -> Diagnostics -> Never
 
@@ -380,8 +358,43 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 
 # Top Bar -> Enable Seconds, Weekday
 
+#################################3
+
+
 ###########################################
-#############  STEP 4
+###########################################
+
+# Privacy and Security
+#- disable diagnostic data, etc in OS as well as apps
+
+# UFW
+# Recommended rules from https://christitus.com/linux-security-mistakes/
+sudo ufw limit 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+# Enable ufw
+sudo ufw enable
+#sudo systemctl enable ufw # Didn't work for some reason
+#sudo systemctl start ufw # Didn't work for some reason
+
+
+# AppArmor
+# https://ubuntu.com/server/docs/security-apparmor
+sudo apt install apparmor-profiles
+sudo apparmor_status
+# sudo systemctl reload apparmor.service
+sudo systemctl enable apparmor.service
+sudo systemctl start apparmor.service
+
+
+
+# TOR Network (Tor browser is different)
+# Refer this for configuring tor network - https://linuxconfig.org/install-tor-proxy-on-ubuntu-20-04-linux
+
+
+###########################################
 ###########################################
 # App specific settings:
 
@@ -395,9 +408,13 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 # UI Settings:
 # General -> Startup -> enable "open previous windows and tabs"
 # General -> Performance -> Enable "Use Hardware acceleration when available" and enable "Use recommended performance settings"
-# General -> ebable "Play DRM-controlled content" (find out whats this first)
+# General -> enable "Play DRM-controlled content" (find out whats this first)
 
+# Ublock Origin - Enable relevant filters
 
+##### Tor Browser
+# Open "Tor Browser Launcher Settings" app -> enable "Download over System Tor"
+# Open "Tor Browser" app -> It will download and install
 
 
 ##### Jetbrains Toolbox
@@ -426,7 +443,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 
 
 ##### Terminal
-# Terminal -> Preferences -> Profies (unnamed) -> Colors -> disable "Use Transparency from System Theme" -> Enable "Use Transparent Background" and set it to around 5%
+# Terminal -> Preferences -> Profiles (unnamed) -> Colors -> disable "Use Transparency from System Theme" -> Enable "Use Transparent Background" and set it to around 5%
 
 
 ##### Calendar
@@ -440,22 +457,17 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Open app "Startup Applications" -> Check if alright
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # Clean up - the following won't install anything btw
-sudo apt-get -y autoclean
-sudo apt-get -y autoremove
-sudo apt-get -y clean
+sudo apt-get -y autoclean && sudo apt-get -y autoremove && sudo apt-get -y clean
 
 ###########################################
-#############  STEP 4
 ###########################################
 
 # reboot
@@ -471,6 +483,11 @@ sudo apt-get -y clean
 # open timeshift app, configure and run backup
 
 
+###########################################
+###########################################
+
+# Some commands to read about
+# sudo apt dist-upgrade
 
 
 
