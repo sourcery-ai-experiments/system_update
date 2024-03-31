@@ -16,11 +16,13 @@
 ###########################################
 ###########################################
 
+##### SHELL
+
 # Did basic research of bash vs zsh vs fish and felt like zsh was the right one for me. Also, fish isn't POSIX compliant. bash and zsh are mostly compatible with eash other, but fish isn't.
 # sudo apt install zsh
 
 # https://itsfoss.com/zsh-ubuntu/
-sudo apt install zsh git fonts-font-awesome
+sudo apt install -y zsh fonts-font-awesome
 chsh -s $(which zsh) # sets zsh as default
 zsh
 
@@ -28,12 +30,50 @@ zsh
 ###########################################
 ###########################################
 
-# Make terminal beautiful and productive
+##### TERMINAL EMULATORS - Alacritty, Kitty, Konsole, Terminator, XTerm,
+sudo apt install alacritty
 
-# oh my zsh 
-# starship
+
+###########################################
+###########################################
+
+##### Make terminal beautiful and productive
+
+##### oh my zsh - https://ohmyz.sh/
+sudo apt install git wget curl xclip autojump
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Configuring oh-my-zsh:
+
+
+
+# Interesting Built-in plugins:
+# debian, systemd, aliases, colored-man-pages, colorize, command-not-found, cp, rsync, safe-paste, screen, rbw, autojump, github, git, gitignore, postgres, redis-cli, golang, docker, repo, pip, python, pyenv, virtualenv, autopep8, pylint,  themes,
+
+##### starship
+
+sudo snap install starship
+# open bash config
+gedit .bashrc # change to zshrc for zsh
+# Scroll to bottom and paste:
+# eval "$(starship init bash)"
+# save and close gedit
+# close and open terminal and it'll have starship formatting
+# change color scheme of starship
+# draculatheme.com gnome theme # search this
+# also get their gtk theme and gedit theme and icon theme
+# Follow instructions on their website
+# Use Gnome-Tweaks -> Appearance -> Choose individual themesf
+
+
+
+
+
+
 
 # reboot
+
+
 
 ###########################################
 ###########################################
@@ -164,7 +204,7 @@ sudo apt install -y openjdk-22-jdk
 # Install vscode
 # Documentation: https://code.visualstudio.com/docs/setup/linux 
 
-sudo apt-get install -y wget gpg
+sudo apt install -y wget gpg
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
@@ -226,6 +266,14 @@ sudo apt install fonts-jetbrains-mono
 sudo apt install -y unattended-upgrades # Configurations in settings section
 
 sudo apt install -y git
+
+# Github
+sudo mkdir -p -m 755 /etc/apt/keyrings && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+&& sudo apt update \
+&& sudo apt install gh -y
+
 sudo apt install -y htop
 
 # vscode
@@ -284,6 +332,11 @@ flatpak run com.usebottles.bottles
 # KDE Connect
 # find out
 
+# Some network stuff
+sudo apt install -y net-tools
+sudo apt install -y nmap # https://itsfoss.com/how-to-find-what-devices-are-connected-to-network-in-ubuntu/
+# sudo snap install nutty # Does not seem to open when clicked
+
 # Install any of the following as needed
 # sudo apt install -y gimp gparted cargo curl wget unrar unzip 
 # sudo apt install -y libreoffice kdenlive simplescreenrecorder stacer
@@ -325,7 +378,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 # Appearance -> choose dark/light mode and background. Also choose color that matches the background
 
 # Ubuntu Desktop -> Desktop Icons -> Size = Small, Enable "Show Personal Folder"
-# Ubuntu Desktop -> Dock -> disable "Panel Mode", set icon size to around 30, "Position on screen = bottom"
+# Ubuntu Desktop -> Dock -> disable "Panel Mode", set icon size to around 20, "Position on screen = bottom"
 
 # Ubuntu Desktop -> Enhanced Tiling -> Enable
 
@@ -391,7 +444,13 @@ sudo systemctl start apparmor.service
 
 
 # TOR Network (Tor browser is different)
-# Refer this for configuring tor network - https://linuxconfig.org/install-tor-proxy-on-ubuntu-20-04-linux
+source torsocks on
+echo ". torsocks on" >> ~/.bashrc
+echo ". torsocks on" >> ~/.zshrc
+# source torsocks off #  toggle torsocks mode off again
+# TODO - Refer this for configuring tor network next steps - https://linuxconfig.org/install-tor-proxy-on-ubuntu-20-04-linux
+# Also refer https://help.ubuntu.com/community/Tor
+# https://community.torproject.org/relay/setup/bridge/debian-ubuntu/
 
 
 ###########################################
@@ -461,11 +520,19 @@ sudo systemctl start apparmor.service
 
 # Open app "Startup Applications" -> Check if alright
 
+
+# For apps that you want to delay startup, append "sleep" <space> <seconds> <semicolon> before the existing command there
+# Example: Change the following in command box for jetbrains toolbox startup entry:
+# /home/nbhirud/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox --minimize
+# To the following
+# sleep 60;/home/nbhirud/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox --minimize
+# This did not work - find out why
+
 ###########################################
 ###########################################
 
 # Clean up - the following won't install anything btw
-sudo apt-get -y autoclean && sudo apt-get -y autoremove && sudo apt-get -y clean
+sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean
 
 ###########################################
 ###########################################
@@ -486,9 +553,12 @@ sudo apt-get -y autoclean && sudo apt-get -y autoremove && sudo apt-get -y clean
 ###########################################
 ###########################################
 
-# Some commands to read about
+# TODO - Some commands and tools to read about
 # sudo apt dist-upgrade
-
-
-
+# SELinux
+# clamav and clamtk
+sudo apt install -y clamav clamtk
+# Safing Portmaster
+# Tails OS - portable persistant OS from USB for library
+# Obfuscate for quickly hiding parts or writing on images
 
