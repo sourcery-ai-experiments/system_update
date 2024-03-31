@@ -557,6 +557,7 @@ sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean
 # sudo apt dist-upgrade
 # SELinux
 # clamav and clamtk
+sudo apt install -y clamav clamtk
 # Safing Portmaster
 # Tails OS - portable persistant OS from USB for library
 # Obfuscate for quickly hiding parts or writing on images
