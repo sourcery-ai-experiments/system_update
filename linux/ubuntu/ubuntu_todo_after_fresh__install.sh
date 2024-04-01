@@ -1,3 +1,4 @@
+
 # The following steps were written based on Ubuntu 23.10 x86_64
 
 ###########################################
@@ -10,30 +11,26 @@
 # Open "Software and Updates" 
 #    -> "Ubuntu Software" -> "Download from" -> "Server from US"
 
-
 # reboot
 
 ###########################################
 ###########################################
 
-##### Fonts setup early to make zsh look beautiful from beginning
-
+##### Fonts setup early to make zsh look good from beginning (needs nerd fonts)
 
 # Commonly used media codecs and fonts for Ubuntu
 # Need to click ok and then yes manually
 sudo apt install -y ubuntu-restricted-extras
 
-
 # Commonly used restricted packages for Ubuntu
 sudo apt install -y ubuntu-restricted-addons
 
 # Install some fonts
-sudo apt install fonts-jetbrains-mono
+# sudo apt install fonts-jetbrains-mono # Covered by nerd-fonts below, so skip this
 
 # Also install these:
-# https://github.com/powerline/fonts
 # https://github.com/ryanoasis/nerd-fonts
-
+# https://github.com/powerline/fonts
 
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 
@@ -47,16 +44,12 @@ git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 # Inconsolata
 # CascadiaCode
 # MartianMono
-
-# Copy above folders from patched-fonts dir into a new directory called "nerd_fonts" -> Delete all files that are not either *.ttf or *.otf -> move thie nerf_fonts directory to ~/.local/share/fonts
-
-
+# Copy above folders from patched-fonts dir into a new directory called "nerd_fonts" -> Delete all files that are not either *.ttf or *.otf -> move the nerd_fonts directory to ~/.local/share/fonts
 
 fc-cache -fr # clear font cache
 fc-list | grep "jetbrains" # To check if jetbrains fond was installed successfully
 
-
-# ~/config/fontconfig/fonts.conf
+# ~/config/fontconfig/fonts.conf # Did not find this. Use GNOME Tweaks app instead
 # set multiple <family> tags with different font families under <prefer> section
 # This is a way to set preferred font and fall-back fonts
 
@@ -65,7 +58,6 @@ fc-list | grep "jetbrains" # To check if jetbrains fond was installed successful
 
 ##### SHELL
 echo $SHELL # To check current shell
-
 # Did basic research of bash vs zsh vs fish and felt like zsh was the right one for me. Also, fish isn't POSIX compliant. bash and zsh are mostly compatible with eash other, but fish isn't.
 # sudo apt install zsh
 
@@ -74,20 +66,18 @@ sudo apt install -y zsh fonts-font-awesome
 chsh -s $(which zsh) # sets zsh as default
 zsh
 
-
 ###########################################
 ###########################################
 
 ##### TERMINAL EMULATORS - Alacritty, Kitty, Konsole, Terminator, XTerm,
-sudo apt install alacritty
-
+#sudo apt install alacritty # Default console is good enough for my current usage
 
 ###########################################
 ###########################################
 
 ##### Make terminal beautiful and productive
 
-# Step 1 - If not already done, set nerd fonts as default in "GNOME Tweaks", "GNOME Terminal -> unnamed", "Alacritty", etc
+# Step 1 - If not already done, set nerd fonts as default in "GNOME Tweaks", "GNOME Terminal -> unnamed",
 
 ##### oh my zsh - https://ohmyz.sh/
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
@@ -134,19 +124,13 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 #ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 #ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
 
-
-
-
-
-
-
-
 omz update
 # Reloads the updated terminal theme
 source ~/.zshrc
 
 ######################################################################
 ##### starship
+# Skip this. omz feels more helpful after trying both.
 
 #sudo snap install starship
 # Add the following to the end of ~/.bashrc:
@@ -162,18 +146,25 @@ gedit .bashrc # change to zshrc for zsh
 # save and close gedit
 # close and open terminal and it'll have starship formatting
 # change color scheme of starship
-# draculatheme.com gnome theme # search this
-# also get their gtk theme and gedit theme and icon theme
-# Follow instructions on their website
-# Use Gnome-Tweaks -> Appearance -> Choose individual themes
-
-
-
-
 
 # Reloads the updated terminal theme
 source ~/.zshrc
 source ~/.bashrcf
+# reboot
+
+#########################
+
+# Themes - Liked dracula more
+
+# draculatheme.com gnome theme # search this
+# also get their gtk theme and gedit theme and icon theme
+# Follow instructions on their website
+
+# Nordic Theme - https://www.pling.com/p/1267246/
+#gsettings set org.gnome.desktop.interface gtk-theme Nordic
+#gsettings set org.gnome.desktop.wm.preferences theme Nordic
+
+# Use Gnome-Tweaks -> Appearance -> Choose individual themes to set these themes.
 # reboot
 
 ###########################################
@@ -181,7 +172,6 @@ source ~/.bashrcf
 
 # fig.io
 # Another cool tool, but probably don't install it with omz or starship
-
 
 ###########################################
 ###########################################
@@ -244,7 +234,6 @@ sudo service fwupd start
 sudo fwupdmgr refresh
 sudo fwupdmgr update
 
-
 ###########################################
 ###########################################
 
@@ -297,7 +286,6 @@ sudo apt install -y python3.12
 # sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 # sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 2
 
-
 ###########################################
 ###########################################
 
@@ -319,7 +307,6 @@ sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packag
 rm -f packages.microsoft.gpg
 
 sudo apt install -y apt-transport-https
-sudo apt update
 sudo apt install -y code # or code-insiders
 
 ###########################################
@@ -331,7 +318,6 @@ sudo apt install -y code # or code-insiders
 # May need to run the following if opening toolbox app gives error:
 # sudo apt install -y libfuse2
 # Install Pycharm later below
-
 
 ###########################################
 ###########################################
@@ -351,7 +337,6 @@ sudo apt install -y code # or code-insiders
 
 # Settings within it are explained below
 
-
 ###########################################
 ###########################################
 
@@ -368,7 +353,7 @@ sudo mkdir -p -m 755 /etc/apt/keyrings && wget -qO- https://cli.github.com/packa
 && sudo apt update \
 && sudo apt install gh -y
 
-sudo apt install -y htop
+sudo apt install -y htop plocate
 
 # vscode
 
@@ -435,8 +420,6 @@ sudo apt install -y nmap # https://itsfoss.com/how-to-find-what-devices-are-conn
 # sudo apt install -y gimp gparted cargo curl wget unrar unzip 
 # sudo apt install -y libreoffice kdenlive simplescreenrecorder stacer
 
-
-
 ###########################################
 ###########################################
 
@@ -446,9 +429,6 @@ sudo apt install -y nmap # https://itsfoss.com/how-to-find-what-devices-are-conn
 # Steam -> Settings -> Steam Play -> Enable "Enable Steam Play for supported titles"
 # Steam -> Settings -> Steam Play -> Enable "Enable Steam Play for all other titles"
 # Steam -> Settings -> Steam Play -> Select the latest proton version from drop down
-
-
-
 
 ###########################################
 ###########################################
@@ -481,7 +461,6 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 # Privacy -> Screen Lock -> Adjust to liking,
 # Privacy -> disable "Location Services"
 # Privacy -> Diagnostics -> Never
-
 
 # Online Accounts - Add whatever accounts I want to sync. Adding google shows Google Drive in Files
 
@@ -546,11 +525,9 @@ echo ". torsocks on" >> ~/.zshrc
 # Also refer https://help.ubuntu.com/community/Tor
 # https://community.torproject.org/relay/setup/bridge/debian-ubuntu/
 
-
 ###########################################
 ###########################################
 # App specific settings:
-
 
 ##### Firefox:
 
@@ -569,28 +546,28 @@ echo ". torsocks on" >> ~/.zshrc
 # Open "Tor Browser Launcher Settings" app -> enable "Download over System Tor"
 # Open "Tor Browser" app -> It will download and install
 
-
 ##### Jetbrains Toolbox
 # login to the toolbox app
 # Toolbox -> Settings -> Enable auto update
 # Toolbox -> Install Pycharm Community
 # Toolbox -> Pycharm Community Settings -> Auto update, larger memory 
 
-
 ##### alacritty
 # ~/config/alacritty/alacritty.yml
-# Set a nerd font as default
+# Set a nerd font as default - not needed after setting at system level
 
+#locate alacritty.yml
+#mkdir ~/.config/alacritty
+#cp /usr/share/doc/alacritty/examples/alacritty.yml ~/.config/alacritty/
+# Make changes to ~/.config/alacritty/alacritty.yml for configuring
 
 ##### pycharm
-
+# Set "JetbrainsMono Nerd Font" as default editor font
 # set latest python as interpreter
-
 
 ##### vscode
-
+# Set "JetbrainsMono Nerd Font" as default editor font
 # set latest python as interpreter
-
 
 ##### Firefox:
 # Login
@@ -599,10 +576,9 @@ echo ". torsocks on" >> ~/.zshrc
 
 # General -> Language and appearance -> Choose dark/light to Automatic 
 
-
 ##### Terminal
 # Terminal -> Preferences -> Profiles (unnamed) -> Colors -> disable "Use Transparency from System Theme" -> Enable "Use Transparent Background" and set it to around 5%
-# Set a nerd font as default
+# # Set "JetbrainsMono Nerd Font" as default font
 
 ##### Calendar
 # Open it and let it sync for a while
@@ -612,7 +588,6 @@ echo ". torsocks on" >> ~/.zshrc
 
 ##### Chrome or Chromium
 # Open Chrome and disable diagnostics
-
 
 ###########################################
 ###########################################
@@ -661,7 +636,6 @@ sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean
 # Installed above already
 # open timeshift app, configure and run backup
 
-
 ###########################################
 ###########################################
 
@@ -684,7 +658,6 @@ sudo chown clamav /var/log/freshclam.log
 # DatabaseOwner clamav
 # NotifyClamd yes
 
-
 sudo touch /var/log/clamav.log
 sudo chmod 600 /var/log/clamav.log
 sudo chown clamav /var/log/clamav.log
@@ -703,13 +676,6 @@ sudo chown clamav /var/log/clamav.log
 # OnAccessPrevention yes
 # OnAccessDisableDDD yes
 
-
-
-
-
-
-
 # Safing Portmaster
 # Tails OS - portable persistant OS from USB for library
 # Obfuscate for quickly hiding parts or writing on images
-
