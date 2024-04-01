@@ -64,6 +64,7 @@ fc-list | grep "jetbrains" # To check if jetbrains fond was installed successful
 ###########################################
 
 ##### SHELL
+echo $SHELL # To check current shell
 
 # Did basic research of bash vs zsh vs fish and felt like zsh was the right one for me. Also, fish isn't POSIX compliant. bash and zsh are mostly compatible with eash other, but fish isn't.
 # sudo apt install zsh
@@ -130,7 +131,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 #plugins=(git sudo debian safe-paste screen autojump github postgres docker pip python repo themes >
 ## At the bottom of oh-my-zsh stuff:
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
-#ZSH_AUTOSUGGEST_STRATEGY=(completion history match_prev_cmd)
+#ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 #ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
 
 
