@@ -1,4 +1,4 @@
-
+# The following steps were written based on Ubuntu 23.10 x86_64
 
 ###########################################
 ###########################################
@@ -12,6 +12,53 @@
 
 
 # reboot
+
+###########################################
+###########################################
+
+##### Fonts setup early to make zsh look beautiful from beginning
+
+
+# Commonly used media codecs and fonts for Ubuntu
+# Need to click ok and then yes manually
+sudo apt install -y ubuntu-restricted-extras
+
+
+# Commonly used restricted packages for Ubuntu
+sudo apt install -y ubuntu-restricted-addons
+
+# Install some fonts
+sudo apt install fonts-jetbrains-mono
+
+# Also install these:
+# https://github.com/powerline/fonts
+# https://github.com/ryanoasis/nerd-fonts
+
+
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
+
+# JetBrainsMono
+# Meslo
+# Hack
+# RobotoMono
+# SourceCodePro
+# FiraCode
+# Noto
+# Inconsolata
+# CascadiaCode
+# MartianMono
+
+# Copy above folders from patched-fonts dir into a new directory called "nerd_fonts" -> Delete all files that are not either *.ttf or *.otf -> move thie nerf_fonts directory to ~/.local/share/fonts
+
+
+
+fc-cache -fr # clear font cache
+fc-list | grep "jetbrains" # To check if jetbrains fond was installed successfully
+
+
+# ~/config/fontconfig/fonts.conf
+# set multiple <family> tags with different font families under <prefer> section
+# This is a way to set preferred font and fall-back fonts
 
 ###########################################
 ###########################################
@@ -39,20 +86,74 @@ sudo apt install alacritty
 
 ##### Make terminal beautiful and productive
 
+# Step 1 - If not already done, set nerd fonts as default in "GNOME Tweaks", "GNOME Terminal -> unnamed", "Alacritty", etc
+
 ##### oh my zsh - https://ohmyz.sh/
+# https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
 sudo apt install git wget curl xclip autojump
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Configuring oh-my-zsh:
+nano zshrc
+ZSH_THEME="agnoster" # (this is one of the fancy ones)
 
 
 
 # Interesting Built-in plugins:
-# debian, systemd, aliases, colored-man-pages, colorize, command-not-found, cp, rsync, safe-paste, screen, rbw, autojump, github, git, gitignore, postgres, redis-cli, golang, docker, repo, pip, python, pyenv, virtualenv, autopep8, pylint,  themes,
+# debian, systemd, aliases, colored-man-pages, colorize,
+# command-not-found, cp, rsync, safe-paste, screen, rbw,
+# autojump, github, git, gitignore, postgres, redis-cli,
+# golang, docker, repo, pip, python, pyenv, virtualenv,
+# autopep8, pylint,  themes, sudo, history, JsonTools
+# you-should-use, Auto-Notify,
+# zsh-autosuggestions, zsh-syntax-highlighting
 
+# https://github.com/zsh-users/zsh-autosuggestions
+# https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#configuration
+
+# https://github.com/zsh-users/zsh-syntax-highlighting
+
+# TLDR:
+cd $ZSH_CUSTOM/plugins
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# oh-my-zsh config:
+#cd
+#nano .zshrc
+## do the following changes:
+## ZSH_THEME="robbyrussell" # comment this line
+#ZSH_THEME="agnoster"
+#zstyle ':omz:update' mode auto
+#zstyle ':omz:update' frequency 7
+#COMPLETION_WAITING_DOTS="true"
+#plugins=(git sudo debian safe-paste screen autojump github postgres docker pip python repo themes >
+## At the bottom of oh-my-zsh stuff:
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
+#ZSH_AUTOSUGGEST_STRATEGY=(completion history match_prev_cmd)
+#ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
+
+
+
+
+
+
+
+
+omz update
+# Reloads the updated terminal theme
+source ~/.zshrc
+
+######################################################################
 ##### starship
 
-sudo snap install starship
+#sudo snap install starship
+# Add the following to the end of ~/.bashrc:
+#eval "$(starship init bash)"
+echo "$(starship init bash)" >> ~/.bashrc
+# Add the following to the end of ~/.zshrc:
+# eval "$(starship init zsh)"
+
 # open bash config
 gedit .bashrc # change to zshrc for zsh
 # Scroll to bottom and paste:
@@ -63,16 +164,22 @@ gedit .bashrc # change to zshrc for zsh
 # draculatheme.com gnome theme # search this
 # also get their gtk theme and gedit theme and icon theme
 # Follow instructions on their website
-# Use Gnome-Tweaks -> Appearance -> Choose individual themesf
+# Use Gnome-Tweaks -> Appearance -> Choose individual themes
 
 
 
 
 
-
-
+# Reloads the updated terminal theme
+source ~/.zshrc
+source ~/.bashrcf
 # reboot
 
+###########################################
+###########################################
+
+# fig.io
+# Another cool tool, but probably don't install it with omz or starship
 
 
 ###########################################
@@ -224,20 +331,6 @@ sudo apt install -y code # or code-insiders
 # sudo apt install -y libfuse2
 # Install Pycharm later below
 
-
-###########################################
-###########################################
-
-# Commonly used media codecs and fonts for Ubuntu
-# Need to click ok and then yes manually
-sudo apt install -y ubuntu-restricted-extras
-
-
-# Commonly used restricted packages for Ubuntu
-sudo apt install -y ubuntu-restricted-addons
-
-# Install some fonts
-sudo apt install fonts-jetbrains-mono
 
 ###########################################
 ###########################################
@@ -483,6 +576,11 @@ echo ". torsocks on" >> ~/.zshrc
 # Toolbox -> Pycharm Community Settings -> Auto update, larger memory 
 
 
+##### alacritty
+# ~/config/alacritty/alacritty.yml
+# Set a nerd font as default
+
+
 ##### pycharm
 
 # set latest python as interpreter
@@ -503,7 +601,7 @@ echo ". torsocks on" >> ~/.zshrc
 
 ##### Terminal
 # Terminal -> Preferences -> Profiles (unnamed) -> Colors -> disable "Use Transparency from System Theme" -> Enable "Use Transparent Background" and set it to around 5%
-
+# Set a nerd font as default
 
 ##### Calendar
 # Open it and let it sync for a while
@@ -520,13 +618,26 @@ echo ". torsocks on" >> ~/.zshrc
 
 # Open app "Startup Applications" -> Check if alright
 
+# To delay opening of start-up applicarions,
 
+# Find the .desktop file that corresponds with your application
+# in /home/nbhirud/.config/autostart/ directoryand open it in a text editor:
+
+# For example, for jetbrains toolbox:
+# /home/nbhirud/.config/autostart/jetbrains-toolbox.desktop
+# gedit ~/.config/autostart/jetbrains-toolbox.desktop
+# Append/Edit the following line to the file:
+#X-GNOME-Autostart-Delay=90
+#where 90 is the time in seconds you want to delay the application launch by
+
+#### Another method that doesn't seem to work:
 # For apps that you want to delay startup, append "sleep" <space> <seconds> <semicolon> before the existing command there
 # Example: Change the following in command box for jetbrains toolbox startup entry:
 # /home/nbhirud/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox --minimize
 # To the following
 # sleep 60;/home/nbhirud/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox --minimize
 # This did not work - find out why
+
 
 ###########################################
 ###########################################
@@ -557,7 +668,46 @@ sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean
 # sudo apt dist-upgrade
 # SELinux
 # clamav and clamtk
-sudo apt install -y clamav clamtk
+sudo apt install -y clamav clamav-daemon clamtk # Found clamtk to be very un-intuitive, but still install
+# Configure using - https://docs.clamav.net/manual/Usage/Configuration.html
+# TLDR:
+
+sudo touch /var/log/freshclam.log
+sudo chmod 600 /var/log/freshclam.log
+sudo chown clamav /var/log/freshclam.log
+# Do these configs in ~/freshclam.conf
+# LogFileMaxSize 20M
+# LogTime yes
+# LogRotate yes
+# UpdateLogFile /var/log/freshclam.log
+# DatabaseOwner clamav
+# NotifyClamd yes
+
+
+sudo touch /var/log/clamav.log
+sudo chmod 600 /var/log/clamav.log
+sudo chown clamav /var/log/clamav.log
+# Do these configs in ~/clamd.conf
+# Comment the "Example"
+# LogFile /var/log/clamav.log
+# LogFileMaxSize 20M
+# LogTime yes
+# LogRotate yes
+# ExitOnOOM yes # Not sure if this is a good thing to do
+# User clamav
+# DetectPUA yes
+# TLDR of - https://docs.clamav.net/manual/OnAccess.html
+# OnAccessIncludePath /home # Figure out if this is the best option
+# OnAccessExcludeUname clamav
+# OnAccessPrevention yes
+# OnAccessDisableDDD yes
+
+
+
+
+
+
+
 # Safing Portmaster
 # Tails OS - portable persistant OS from USB for library
 # Obfuscate for quickly hiding parts or writing on images
