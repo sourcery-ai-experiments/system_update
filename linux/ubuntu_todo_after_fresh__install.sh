@@ -1,4 +1,4 @@
-
+# The following steps were written based on Ubuntu 23.10 x86_64
 
 ###########################################
 ###########################################
@@ -16,13 +16,55 @@
 ###########################################
 ###########################################
 
+##### Fonts setup early to make zsh look beautiful from beginning
+
+
+# Commonly used media codecs and fonts for Ubuntu
+# Need to click ok and then yes manually
+sudo apt install -y ubuntu-restricted-extras
+
+
+# Commonly used restricted packages for Ubuntu
+sudo apt install -y ubuntu-restricted-addons
+
+# Install some fonts
+sudo apt install fonts-jetbrains-mono
+
+# Also install these:
+# https://github.com/powerline/fonts
+# https://github.com/ryanoasis/nerd-fonts
+
+
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
+# Copy file to ~/.local/share/fonts
+fc-cache -fr # clear font cache
+fc-list | grep "jetbrains" # To check if jetbrains fond was installed successfully
+
+# JetBrainsMono
+# Meslo
+# Hack
+# RobotoMono
+# SourceCodePro
+# FiraCode
+# Noto
+# Inconsolata
+# CascadiaCode
+# MartianMono
+
+# ~/config/fontconfig/fonts.conf
+# set multiple <family> tags with different font families under <prefer> section
+# This is a way to set preferred font and fall-back fonts
+
+###########################################
+###########################################
+
 ##### SHELL
 
 # Did basic research of bash vs zsh vs fish and felt like zsh was the right one for me. Also, fish isn't POSIX compliant. bash and zsh are mostly compatible with eash other, but fish isn't.
 # sudo apt install zsh
 
 # https://itsfoss.com/zsh-ubuntu/
-sudo apt install -y zsh fonts-font-awesome
+sudo apt install -y zsh
 chsh -s $(which zsh) # sets zsh as default
 zsh
 
@@ -40,15 +82,27 @@ sudo apt install alacritty
 ##### Make terminal beautiful and productive
 
 ##### oh my zsh - https://ohmyz.sh/
-sudo apt install git wget curl xclip autojump
+# https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
+sudo apt install git wget curl xclip autojump fonts-font-awesome
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Configuring oh-my-zsh:
+nano zshrc
+ZSH_THEME="agnoster" # (this is one of the fancy ones)
 
 
 
 # Interesting Built-in plugins:
-# debian, systemd, aliases, colored-man-pages, colorize, command-not-found, cp, rsync, safe-paste, screen, rbw, autojump, github, git, gitignore, postgres, redis-cli, golang, docker, repo, pip, python, pyenv, virtualenv, autopep8, pylint,  themes,
+# debian, systemd, aliases, colored-man-pages, colorize,
+# command-not-found, cp, rsync, safe-paste, screen, rbw,
+# autojump, github, git, gitignore, postgres, redis-cli,
+# golang, docker, repo, pip, python, pyenv, virtualenv,
+# autopep8, pylint,  themes, zsh-autosuggestions, zsh-syntax-highlighting
+
+# https://github.com/zsh-users/zsh-autosuggestions
+# https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#configuration
+
+# https://github.com/zsh-users/zsh-syntax-highlighting
 
 ##### starship
 
@@ -63,14 +117,14 @@ gedit .bashrc # change to zshrc for zsh
 # draculatheme.com gnome theme # search this
 # also get their gtk theme and gedit theme and icon theme
 # Follow instructions on their website
-# Use Gnome-Tweaks -> Appearance -> Choose individual themesf
+# Use Gnome-Tweaks -> Appearance -> Choose individual themes
 
 
 
 
 
-
-
+# Reloads the updated terminal theme
+source ~/.zshrc
 # reboot
 
 
@@ -224,20 +278,6 @@ sudo apt install -y code # or code-insiders
 # sudo apt install -y libfuse2
 # Install Pycharm later below
 
-
-###########################################
-###########################################
-
-# Commonly used media codecs and fonts for Ubuntu
-# Need to click ok and then yes manually
-sudo apt install -y ubuntu-restricted-extras
-
-
-# Commonly used restricted packages for Ubuntu
-sudo apt install -y ubuntu-restricted-addons
-
-# Install some fonts
-sudo apt install fonts-jetbrains-mono
 
 ###########################################
 ###########################################
@@ -483,6 +523,11 @@ echo ". torsocks on" >> ~/.zshrc
 # Toolbox -> Pycharm Community Settings -> Auto update, larger memory 
 
 
+##### alacritty
+# ~/config/alacritty/alacritty.yml
+# Set a nerd font as default
+
+
 ##### pycharm
 
 # set latest python as interpreter
@@ -503,7 +548,7 @@ echo ". torsocks on" >> ~/.zshrc
 
 ##### Terminal
 # Terminal -> Preferences -> Profiles (unnamed) -> Colors -> disable "Use Transparency from System Theme" -> Enable "Use Transparent Background" and set it to around 5%
-
+# Set a nerd font as default
 
 ##### Calendar
 # Open it and let it sync for a while
@@ -557,7 +602,46 @@ sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean
 # sudo apt dist-upgrade
 # SELinux
 # clamav and clamtk
-sudo apt install -y clamav clamtk
+sudo apt install -y clamav clamav-daemon clamtk # Found clamtk to be very un-intuitive, but still install
+# Configure using - https://docs.clamav.net/manual/Usage/Configuration.html
+# TLDR:
+
+sudo touch /var/log/freshclam.log
+sudo chmod 600 /var/log/freshclam.log
+sudo chown clamav /var/log/freshclam.log
+# Do these configs in ~/freshclam.conf
+# LogFileMaxSize 20M
+# LogTime yes
+# LogRotate yes
+# UpdateLogFile /var/log/freshclam.log
+# DatabaseOwner clamav
+# NotifyClamd yes
+
+
+sudo touch /var/log/clamav.log
+sudo chmod 600 /var/log/clamav.log
+sudo chown clamav /var/log/clamav.log
+# Do these configs in ~/clamd.conf
+# Comment the "Example"
+# LogFile /var/log/clamav.log
+# LogFileMaxSize 20M
+# LogTime yes
+# LogRotate yes
+# ExitOnOOM yes # Not sure if this is a good thing to do
+# User clamav
+# DetectPUA yes
+# TLDR of - https://docs.clamav.net/manual/OnAccess.html
+# OnAccessIncludePath /home # Figure out if this is the best option
+# OnAccessExcludeUname clamav
+# OnAccessPrevention yes
+# OnAccessDisableDDD yes
+
+
+
+
+
+
+
 # Safing Portmaster
 # Tails OS - portable persistant OS from USB for library
 # Obfuscate for quickly hiding parts or writing on images
