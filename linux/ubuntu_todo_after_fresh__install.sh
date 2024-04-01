@@ -36,9 +36,6 @@ sudo apt install fonts-jetbrains-mono
 
 
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
-# Copy file to ~/.local/share/fonts
-fc-cache -fr # clear font cache
-fc-list | grep "jetbrains" # To check if jetbrains fond was installed successfully
 
 # JetBrainsMono
 # Meslo
@@ -50,6 +47,14 @@ fc-list | grep "jetbrains" # To check if jetbrains fond was installed successful
 # Inconsolata
 # CascadiaCode
 # MartianMono
+
+# Copy above folders from patched-fonts dir into a new directory called "nerd_fonts" -> Delete all files that are not either *.ttf or *.otf -> move thie nerf_fonts directory to ~/.local/share/fonts
+
+
+
+fc-cache -fr # clear font cache
+fc-list | grep "jetbrains" # To check if jetbrains fond was installed successfully
+
 
 # ~/config/fontconfig/fonts.conf
 # set multiple <family> tags with different font families under <prefer> section
@@ -64,7 +69,7 @@ fc-list | grep "jetbrains" # To check if jetbrains fond was installed successful
 # sudo apt install zsh
 
 # https://itsfoss.com/zsh-ubuntu/
-sudo apt install -y zsh
+sudo apt install -y zsh fonts-font-awesome
 chsh -s $(which zsh) # sets zsh as default
 zsh
 
@@ -81,9 +86,11 @@ sudo apt install alacritty
 
 ##### Make terminal beautiful and productive
 
+# Step 1 - If not already done, set nerd fonts as default in "GNOME Tweaks", "GNOME Terminal -> unnamed", "Alacritty", etc
+
 ##### oh my zsh - https://ohmyz.sh/
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
-sudo apt install git wget curl xclip autojump fonts-font-awesome
+sudo apt install git wget curl xclip autojump
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Configuring oh-my-zsh:
@@ -97,16 +104,56 @@ ZSH_THEME="agnoster" # (this is one of the fancy ones)
 # command-not-found, cp, rsync, safe-paste, screen, rbw,
 # autojump, github, git, gitignore, postgres, redis-cli,
 # golang, docker, repo, pip, python, pyenv, virtualenv,
-# autopep8, pylint,  themes, zsh-autosuggestions, zsh-syntax-highlighting
+# autopep8, pylint,  themes, sudo, history, JsonTools
+# you-should-use, Auto-Notify,
+# zsh-autosuggestions, zsh-syntax-highlighting
 
 # https://github.com/zsh-users/zsh-autosuggestions
 # https://github.com/zsh-users/zsh-autosuggestions?tab=readme-ov-file#configuration
 
 # https://github.com/zsh-users/zsh-syntax-highlighting
 
+# TLDR:
+cd $ZSH_CUSTOM/plugins
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# oh-my-zsh config:
+#cd
+#nano .zshrc
+## do the following changes:
+## ZSH_THEME="robbyrussell" # comment this line
+#ZSH_THEME="agnoster"
+#zstyle ':omz:update' mode auto
+#zstyle ':omz:update' frequency 7
+#COMPLETION_WAITING_DOTS="true"
+#plugins=(git sudo debian safe-paste screen autojump github postgres docker pip python repo themes >
+## At the bottom of oh-my-zsh stuff:
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
+#ZSH_AUTOSUGGEST_STRATEGY=(completion history match_prev_cmd)
+#ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
+
+
+
+
+
+
+
+
+omz update
+# Reloads the updated terminal theme
+source ~/.zshrc
+
+######################################################################
 ##### starship
 
-sudo snap install starship
+#sudo snap install starship
+# Add the following to the end of ~/.bashrc:
+#eval "$(starship init bash)"
+echo "$(starship init bash)" >> ~/.bashrc
+# Add the following to the end of ~/.zshrc:
+# eval "$(starship init zsh)"
+
 # open bash config
 gedit .bashrc # change to zshrc for zsh
 # Scroll to bottom and paste:
@@ -125,8 +172,14 @@ gedit .bashrc # change to zshrc for zsh
 
 # Reloads the updated terminal theme
 source ~/.zshrc
+source ~/.bashrcf
 # reboot
 
+###########################################
+###########################################
+
+# fig.io
+# Another cool tool, but probably don't install it with omz or starship
 
 
 ###########################################
@@ -565,13 +618,26 @@ echo ". torsocks on" >> ~/.zshrc
 
 # Open app "Startup Applications" -> Check if alright
 
+# To delay opening of start-up applicarions,
 
+# Find the .desktop file that corresponds with your application
+# in /home/nbhirud/.config/autostart/ directoryand open it in a text editor:
+
+# For example, for jetbrains toolbox:
+# /home/nbhirud/.config/autostart/jetbrains-toolbox.desktop
+# gedit ~/.config/autostart/jetbrains-toolbox.desktop
+# Append/Edit the following line to the file:
+#X-GNOME-Autostart-Delay=90
+#where 90 is the time in seconds you want to delay the application launch by
+
+#### Another method that doesn't seem to work:
 # For apps that you want to delay startup, append "sleep" <space> <seconds> <semicolon> before the existing command there
 # Example: Change the following in command box for jetbrains toolbox startup entry:
 # /home/nbhirud/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox --minimize
 # To the following
 # sleep 60;/home/nbhirud/.local/share/JetBrains/Toolbox/bin/jetbrains-toolbox --minimize
 # This did not work - find out why
+
 
 ###########################################
 ###########################################
