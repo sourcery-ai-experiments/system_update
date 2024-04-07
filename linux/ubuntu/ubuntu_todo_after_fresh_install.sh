@@ -44,7 +44,8 @@ git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 # Inconsolata
 # CascadiaCode
 # MartianMono
-# Copy above folders from patched-fonts dir into a new directory called "nerd_fonts" -> Delete all files that are not either *.ttf or *.otf -> move the nerd_fonts directory to ~/.local/share/fonts
+# Copy above folders from patched-fonts dir into a new directory called "nerd_fonts" -> Delete all files that are
+# not either *.ttf or *.otf -> move the nerd_fonts directory to ~/.local/share/fonts
 
 fc-cache -fr # clear font cache
 fc-list | grep "jetbrains" # To check if jetbrains fond was installed successfully
@@ -58,7 +59,8 @@ fc-list | grep "jetbrains" # To check if jetbrains fond was installed successful
 
 ##### SHELL
 echo $SHELL # To check current shell
-# Did basic research of bash vs zsh vs fish and felt like zsh was the right one for me. Also, fish isn't POSIX compliant. bash and zsh are mostly compatible with eash other, but fish isn't.
+# Did basic research of bash vs zsh vs fish and felt like zsh was the right one for me. Also, fish isn't POSIX
+# compliant. bash and zsh are mostly compatible with eash other, but fish isn't.
 # sudo apt install zsh
 
 # https://itsfoss.com/zsh-ubuntu/
@@ -263,8 +265,11 @@ sudo ubuntu-drivers autoinstall # Installs all the recommended drivers
 ###########################################
 ###########################################
 # Gnome extensions
+gnome-shell --version
+# sudo apt install -y gnome-shell-extensions
 sudo apt install -y gnome-shell-extension-manager
 sudo apt install -y gnome-browser-connector
+# sudo apt install chrome-gnome-shell
 # Go to https://extensions.gnome.org -> Install browder extension suggested
 
 # Can also be installed using "App Center" -> Search "GNOME Extensions" and install "Extension Manager" by Matthew Jakeman
@@ -299,14 +304,15 @@ sudo apt install -y openjdk-22-jdk
 
 ## Install vscode
 ## Documentation: https://code.visualstudio.com/docs/setup/linux
-#sudo apt install -y wget gpg
-#wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-#sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-#sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-#rm -f packages.microsoft.gpg
+# sudo apt install -y wget gpg
+# wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+# sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+# sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] \
+# https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+# rm -f packages.microsoft.gpg
 #
-#sudo apt install -y apt-transport-https
-#sudo apt install -y code # or code-insiders
+# sudo apt install -y apt-transport-https
+# sudo apt install -y code # or code-insiders
 
 # VSCodium
 # Open-source vscode - Install this instead - https://github.com/vscodium/vscodium/
@@ -333,9 +339,7 @@ sudo apt install -y openjdk-22-jdk
 ###########################################
 
 # Install GNOME Tweaks
-
 # Open "App Center" -> Search "GNOME Tweaks" and install "GNOME Tweaks" by "The GNOME Project"
-
 # Settings within it are explained below
 
 ###########################################
@@ -348,15 +352,15 @@ sudo apt install -y unattended-upgrades # Configurations in settings section
 sudo apt install -y git
 
 # Github
-sudo mkdir -p -m 755 /etc/apt/keyrings && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+sudo mkdir -p -m 755 /etc/apt/keyrings \
+&& wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
 && sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
-&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable \
+main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
 && sudo apt update \
 && sudo apt install gh -y
 
 sudo apt install -y htop plocate
-
-# vscode
 
 # Useful to check system info in cool way
 sudo apt install -y neofetch
@@ -368,13 +372,11 @@ sudo apt install tor torbrowser-launcher
 # sudo apt install -y tlp tlp-rdw
 # sudo tlp start
 
-
 # Install VLC 
 sudo apt install -y vlc
 # Can also install VLC from "Apps Center"
 # Remove the gnome video player to remove redundancy
-sudo apt remove totem
-
+sudo apt remove -y totem
 
 # Download and install google chrome from their website
 # For better privacy, install chromium instead
@@ -383,7 +385,6 @@ sudo apt remove totem
 # sudo dpkg -i google_chrome_stable_current_amd64.deb
 sudo apt install chromium-browser
 
-
 # Preloads most used apps in RAM for quick reaction times
 sudo apt install -y preload 
 #sudo nano /etc/preload.conf
@@ -391,9 +392,8 @@ sudo apt install -y preload
 # Configurations in last section
 sudo apt install -y timeshift
 
-
 # Synaptic Package Manager - apt based package manager
-sudo apt install -y synaptic:
+sudo apt install -y synaptic
 
 # Bleachbit -> System cleaner
 # Open as root
@@ -443,11 +443,23 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 
 ##### Settings
 
-# Network -> Click the gear box next to the connection in use -> IPV4 tab -> Disable "Automatic" for DNS -> Paste the following in the box and apply:
-# 8.8.8.8, 1.1.1.1, 8.8.4.4, 1.0.0.1
+# Network -> Click the gear box next to the connection in use -> IPV4 tab -> Disable "Automatic" for
+# DNS -> Paste the following in the box and apply:
+# 1.1.1.2, 1.0.0.2, 8.8.8.8, 1.1.1.1, 8.8.4.4, 1.0.0.1
 
-# Network -> Click the gear box next to the connection in use -> IPV6 tab -> "Additional DNS servers" -> Paste the following in the box and apply:
-# 2001:4860:4860::8888, 2001:4860:4860::8844, 2606:4700:4700::1111, 2606:4700:4700::1001
+# Network -> Click the gear box next to the connection in use -> IPV6 tab -> "Additional DNS servers" -> Paste
+# the following in the box and apply:
+# 2606:4700:4700::1112, 2606:4700:4700::1002, 2001:4860:4860::8888, 2001:4860:4860::8844, 2606:4700:4700::1111, 2606:4700:4700::1001
+
+# Useful links abot DNS: 
+# https://developers.cloudflare.com/1.1.1.1/ip-addresses/
+# https://pkg.cloudflare.com/index.html
+# https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/dns-over-https-client/
+# https://developers.cloudflare.com/1.1.1.1/setup/linux/
+# https://developers.cloudflare.com/1.1.1.1/setup/router/
+# https://developers.cloudflare.com/1.1.1.1/other-ways-to-use-1.1.1.1/dns-over-tor/
+# https://blog.cloudflare.com/welcome-hidden-resolver/
+
 
 # Network -> Click the gear box next to the connection in use -> IPV6 tab -> "IPV6 Method" = Disabled (reduce attack surface area unless explicitly needed)
 
@@ -526,7 +538,12 @@ echo ". torsocks on" >> ~/.zshrc
 # TODO - Refer this for configuring tor network next steps - https://linuxconfig.org/install-tor-proxy-on-ubuntu-20-04-linux
 # Also refer https://help.ubuntu.com/community/Tor
 # https://community.torproject.org/relay/setup/bridge/debian-ubuntu/
+# https://www.wikihow.com/Set-a-Specific-Country-in-a-Tor-Browser
 
+
+# For changing tor congif:
+sudo nano /etc/tor/torrc
+sudo systemctl reload tor
 ###########################################
 ###########################################
 # App specific settings:
