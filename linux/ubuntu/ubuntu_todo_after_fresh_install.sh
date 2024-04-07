@@ -60,7 +60,7 @@ fc-list | grep "jetbrains" # To check if jetbrains fond was installed successful
 ##### SHELL
 echo $SHELL # To check current shell
 # Did basic research of bash vs zsh vs fish and felt like zsh was the right one for me. Also, fish isn't POSIX
-# compliant. bash and zsh are mostly compatible with eash other, but fish isn't.
+# compliant. bash and zsh are mostly compatible with each other, but fish isn't.
 # sudo apt install zsh
 
 # https://itsfoss.com/zsh-ubuntu/
