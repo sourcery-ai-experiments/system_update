@@ -16,6 +16,16 @@
 ###########################################
 ###########################################
 
+# Get this repo
+sudo apt install git
+mkdir CodeProjects
+cd CodeProjects
+git clone https://github.com/nbhirud/system_update.git
+gedit system_update/linux/ubuntu/ubuntu_todo_after_fresh_install.sh
+
+###########################################
+###########################################
+
 ##### Fonts setup early to make zsh look good from beginning (needs nerd fonts)
 
 # Commonly used media codecs and fonts for Ubuntu
@@ -32,6 +42,7 @@ sudo apt install -y ubuntu-restricted-addons
 # https://github.com/ryanoasis/nerd-fonts
 # https://github.com/powerline/fonts
 
+cd ~/Downloads
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 
 # JetBrainsMono
@@ -47,8 +58,15 @@ git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 # Copy above folders from patched-fonts dir into a new directory called "nerd_fonts" -> Delete all files that are
 # not either *.ttf or *.otf -> move the nerd_fonts directory to ~/.local/share/fonts
 
+# To delete unnecessary files, run the following:
+# find . -name "*.md" -type f -delete
+# find . -name "*.txt" -type f -delete
+# find . -name "LICENSE" -type f -delete
+# But firrst verify without the -delete option like following:
+find . -name "*.bak" -type f
+
 fc-cache -fr # clear font cache
-fc-list | grep "jetbrains" # To check if jetbrains fond was installed successfully
+fc-list | grep "JetBrains" # To check if jetbrains fond was installed successfully
 
 # ~/config/fontconfig/fonts.conf # Did not find this. Use GNOME Tweaks app instead
 # set multiple <family> tags with different font families under <prefer> section
@@ -83,11 +101,11 @@ zsh
 
 ##### oh my zsh - https://ohmyz.sh/
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
-sudo apt install git wget curl xclip autojump
+sudo apt install wget curl xclip autojump
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Configuring oh-my-zsh:
-nano zshrc
+nano .zshrc
 ZSH_THEME="agnoster" # (this is one of the fancy ones)
 
 
