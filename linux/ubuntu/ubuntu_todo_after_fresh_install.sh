@@ -559,7 +559,7 @@ echo ". torsocks on" >> ~/.zshrc
 # https://www.wikihow.com/Set-a-Specific-Country-in-a-Tor-Browser
 
 
-# For changing tor congif:
+# For changing tor config:
 sudo nano /etc/tor/torrc
 sudo systemctl reload tor
 ###########################################
