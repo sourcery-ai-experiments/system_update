@@ -138,7 +138,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 #zstyle ':omz:update' mode auto
 #zstyle ':omz:update' frequency 7
 #COMPLETION_WAITING_DOTS="true"
-#plugins=(git sudo debian safe-paste screen autojump github postgres docker pip python repo themes >
+#plugins=(git sudo debian safe-paste screen autojump github postgres docker pip python repo themes zsh-autosuggestions zsh-syntax-highlighting)
 ## At the bottom of oh-my-zsh stuff:
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 #ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
@@ -176,15 +176,48 @@ source ~/.bashrcf
 
 # Themes - Liked dracula more
 
-# draculatheme.com gnome theme # search this
-# also get their gtk theme and gedit theme and icon theme
-# Follow instructions on their website
+# # draculatheme.com gnome theme # search this
+# # also get their gtk theme and gedit theme and icon theme
+# # Follow instructions on their website
+# https://draculatheme.com/gtk
+# https://draculatheme.com/gedit
+# https://draculatheme.com/visual-studio-code
+# https://draculatheme.com/gimp
+# https://draculatheme.com/chrome
+# https://draculatheme.com/firefox
+# https://draculatheme.com/alacritty
+# https://draculatheme.com/jetbrains
+# https://draculatheme.com/jupyter-notebook
+# https://draculatheme.com/jupyterlab
+# https://draculatheme.com/duckduckgo
+# https://draculatheme.com/spyder-ide
+
+# # Not for PC
+# https://draculatheme.com/github
+
+# # Non Essential:
+# https://draculatheme.com/libreoffice
+# https://draculatheme.com/youtube
+# https://draculatheme.com/grub
+# https://draculatheme.com/google-calendar
+# https://draculatheme.com/stackoverflow
+
+# # Don't use with omz
+# https://draculatheme.com/zsh-syntax-highlighting
+# https://draculatheme.com/git
+# https://draculatheme.com/gnome-terminal
+# https://draculatheme.com/zsh
+
 
 # Nordic Theme - https://www.pling.com/p/1267246/
 #gsettings set org.gnome.desktop.interface gtk-theme Nordic
 #gsettings set org.gnome.desktop.wm.preferences theme Nordic
 
-# Use Gnome-Tweaks -> Appearance -> Choose individual themes to set these themes.
+# # Use Gnome-Tweaks -> Appearance -> Choose individual themes to set these themes.
+# Fonts:
+# Interface Text = Ubuntu Nerd Font Regular
+# Document Text = JetBrainsMono Nerd Font Regular
+# Monospace Text = JetBrainsMono Nerd Font Mono Regular
 # reboot
 
 ###########################################
@@ -224,7 +257,7 @@ sudo snap refresh # updates all snap apps
 
 # Refer this for latest instructions: https://flathub.org/setup/Ubuntu
 # Install flatpak and enable Flathub
-sudo apt install -y gnome-software-plugin-flatpak  flatpak
+sudo apt install -y gnome-software-plugin-flatpak flatpak
 # flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 # https://flathub.org/
@@ -251,8 +284,8 @@ flatpak run org.mozilla.firefox
 # Firmware updates using terminal:
 # Reference: https://itsfoss.com/update-firmware-ubuntu/
 sudo service fwupd start
-sudo fwupdmgr refresh
-sudo fwupdmgr update
+sudo fwupdmgr refresh # didn't work on UEFI, but worked on Legacy
+sudo fwupdmgr update # didn't work on UEFI, but worked on Legacy
 
 ###########################################
 ###########################################
@@ -334,6 +367,9 @@ sudo apt install -y openjdk-22-jdk
 
 # VSCodium
 # Open-source vscode - Install this instead - https://github.com/vscodium/vscodium/
+flatpak install flathub com.vscodium.codium
+flatpak run com.vscodium.codium
+
 ###########################################
 ###########################################
 
@@ -343,6 +379,10 @@ sudo apt install -y openjdk-22-jdk
 # May need to run the following if opening toolbox app gives error:
 # sudo apt install -y libfuse2
 # Install Pycharm later below
+# If toolbox not needed, go for "Standalone installation". Remember to download Pycharm community edition
+sudo tar xzf pycharm-*.tar.gz -C /opt/
+cd /opt/pycharm-professional-2024.1/bin
+sh pycharm.sh
 
 ###########################################
 ###########################################
@@ -367,8 +407,6 @@ sudo apt install -y openjdk-22-jdk
 
 sudo apt install -y unattended-upgrades # Configurations in settings section
 
-sudo apt install -y git
-
 # Github
 sudo mkdir -p -m 755 /etc/apt/keyrings \
 && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
@@ -384,7 +422,8 @@ sudo apt install -y htop plocate
 sudo apt install -y neofetch
 
 # Install tor browser
-sudo apt install tor torbrowser-launcher
+sudo apt install tor
+sudo flatpak install tor-browser
 
 # Only for laptop - Improve Laptop Battery:
 # sudo apt install -y tlp tlp-rdw
@@ -401,10 +440,10 @@ sudo apt remove -y totem
 # Select "64 bit .deb" and click "accept and install"
 # Once downloaded, open terminal in the download folder and run the following (replace filename if different):
 # sudo dpkg -i google_chrome_stable_current_amd64.deb
-sudo apt install chromium-browser
+sudo apt install -y chromium-browser
 
 # Preloads most used apps in RAM for quick reaction times
-sudo apt install -y preload 
+# sudo apt install -y preload # Skip this on low memory systems
 #sudo nano /etc/preload.conf
 
 # Configurations in last section
@@ -425,15 +464,15 @@ flatpak install -y flathub com.spotify.Client
 sudo apt install -y ufw
 
 # Run Windows applications on ubuntu - can use actual *.exe files
-flatpak install flathub com.usebottles.bottles
-flatpak run com.usebottles.bottles
+# flatpak install flathub com.usebottles.bottles
+# flatpak run com.usebottles.bottles
 
 # KDE Connect
 # find out
 
 # Some network stuff
-sudo apt install -y net-tools
-sudo apt install -y nmap # https://itsfoss.com/how-to-find-what-devices-are-connected-to-network-in-ubuntu/
+# sudo apt install -y net-tools
+# sudo apt install -y nmap # https://itsfoss.com/how-to-find-what-devices-are-connected-to-network-in-ubuntu/
 # sudo snap install nutty # Does not seem to open when clicked
 
 # Install any of the following as needed
@@ -577,6 +616,10 @@ sudo systemctl reload tor
 # General -> Performance -> Enable "Use Hardware acceleration when available" and enable "Use recommended performance settings"
 # General -> enable "Play DRM-controlled content" (find out whats this first)
 
+# Privacy - 
+    # Enhanced Tracking Protection = Strict
+    # Websitr Privacy Preferences - enable both options (sell/share data and do not track)
+
 # Ublock Origin - Enable relevant filters
 
 ##### Tor Browser
@@ -684,9 +727,23 @@ sudo apt install -y clamav clamav-daemon clamtk # Found clamtk to be very un-int
 # Configure using - https://docs.clamav.net/manual/Usage/Configuration.html
 # TLDR:
 
+# Generate config files:
+clamconf -g freshclam.conf > freshclam.conf
+clamconf -g clamd.conf > clamd.conf
+clamconf -g clamav-milter.conf > clamav-milter.conf
+
+# Create log files:
 sudo touch /var/log/freshclam.log
 sudo chmod 600 /var/log/freshclam.log
 sudo chown clamav /var/log/freshclam.log
+
+sudo touch /var/log/clamav.log
+sudo chmod 600 /var/log/clamav.log
+sudo chown clamav /var/log/clamav.log
+
+# Configurations:
+
+## freshclam
 # Do these configs in ~/freshclam.conf
 # LogFileMaxSize 20M
 # LogTime yes
@@ -695,9 +752,7 @@ sudo chown clamav /var/log/freshclam.log
 # DatabaseOwner clamav
 # NotifyClamd yes
 
-sudo touch /var/log/clamav.log
-sudo chmod 600 /var/log/clamav.log
-sudo chown clamav /var/log/clamav.log
+## clamd
 # Do these configs in ~/clamd.conf
 # Comment the "Example"
 # LogFile /var/log/clamav.log
