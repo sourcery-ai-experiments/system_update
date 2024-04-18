@@ -3,7 +3,7 @@
 
 . torsocks off
 
-sudo apt update -y && sudo apt upgrade -y && flatpak update -y && sudo snap refresh &&  omz update -y
+sudo apt update -y && sudo apt upgrade -y && flatpak update -y && sudo snap refresh && sudo freshclam &&  omz update -y
 
 sudo apt dist-upgrade -y && sudo do-release-upgrade
 
