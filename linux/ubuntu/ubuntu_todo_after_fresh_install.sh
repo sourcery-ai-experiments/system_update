@@ -287,8 +287,9 @@ flatpak run org.mozilla.firefox
 # sudo fwupdmgr refresh # didn't work on UEFI, but worked on Legacy
 # sudo fwupdmgr update # didn't work on UEFI, but worked on Legacy
 if [ -d /sys/firmware/efi ]; then
-    echo "UEFI mode detected. Skipping fwupdmgr refresh."
+    echo "UEFI mode detected. Skipping fwupdmgr refresh and update."
 else
+    echo "Legacy BIOS mode detected. Starting fwupd service and performing refresh and update."
     sudo service fwupd start
     sudo fwupdmgr refresh
     sudo fwupdmgr update
