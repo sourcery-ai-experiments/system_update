@@ -1,7 +1,8 @@
 
 # Install/Upgrade Powershell:
 #  winget search Microsoft.PowerShell # Shows available options
-winget install --id Microsoft.Powershell --source winget
+# winget install --id Microsoft.Powershell --source winget
+winget upgrade --id Microsoft.Powershell --source winget  # Installs if not already installed, else upgrades
 
 # Install Tor (not the browser)
 # Download the archive from here: https://www.torproject.org/download/tor/

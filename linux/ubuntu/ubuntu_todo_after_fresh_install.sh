@@ -17,8 +17,8 @@
 ###########################################
 
 # Get this repo
-sudo apt install git
-mkdir CodeProjects
+which git || sudo apt install git # check if a package is already installed to avoid unnecessary operations
+mkdir -p CodeProjects
 cd CodeProjects
 git clone https://github.com/nbhirud/system_update.git
 gedit system_update/linux/ubuntu/ubuntu_todo_after_fresh_install.sh
@@ -283,10 +283,17 @@ flatpak run org.mozilla.firefox
 
 # Firmware updates using terminal:
 # Reference: https://itsfoss.com/update-firmware-ubuntu/
-sudo service fwupd start
-sudo fwupdmgr refresh # didn't work on UEFI, but worked on Legacy
-sudo fwupdmgr update # didn't work on UEFI, but worked on Legacy
-
+# sudo service fwupd start
+# sudo fwupdmgr refresh # didn't work on UEFI, but worked on Legacy
+# sudo fwupdmgr update # didn't work on UEFI, but worked on Legacy
+if [ -d /sys/firmware/efi ]; then
+    echo "UEFI mode detected. Skipping fwupdmgr refresh and update."
+else
+    echo "Legacy BIOS mode detected. Starting fwupd service and performing refresh and update."
+    sudo service fwupd start
+    sudo fwupdmgr refresh
+    sudo fwupdmgr update
+fi
 ###########################################
 ###########################################
 
@@ -771,3 +778,28 @@ sudo chown clamav /var/log/clamav.log
 # Safing Portmaster
 # Tails OS - portable persistant OS from USB for library
 # Obfuscate for quickly hiding parts or writing on images
+
+
+###############################################3
+
+# Programming env:
+
+# https://pipx.pypa.io/stable/installation/
+sudo apt update
+sudo apt install pipx
+pipx ensurepath
+
+# https://python-poetry.org/docs/#installing-with-pipx
+pipx install poetry
+# pipx upgrade poetry
+# pipx uninstall poetry
+
+# Poetry completion:
+mkdir $ZSH_CUSTOM/plugins/poetry
+poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
+# Add to plugins omz array:
+         # plugins(
+         #  ...
+         #	poetry
+         #	...
+         #	)

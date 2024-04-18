@@ -5,10 +5,12 @@
 # your home computer safe (because you will end up plugging the same USB from public PC on home PC and transferring
 # some malware)
 
-# To create Tails USB from linux (or any OS USB for that matter):
+# To create Tails USB from linux (or any bootable OS USB for that matter):
 cd Downloads
-ls # Get the img filename, say tails_os.img
+# ls # Get the img filename, say tails_os.img
+find . -maxdepth 1 -type f -name "*.img" -print
 lsblk # Get the device name of USB stick - confirm using disk size, say /dev/sde
+# lsblk -o NAME,SIZE,MODEL,LABEL,MOUNTPOINTS
 # The following should create the tails usb:
 sudo dd if=tails_os.img of=/dev/sde bs=16M oflag=direct status=progress
 
