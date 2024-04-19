@@ -53,7 +53,7 @@ winget install --id Microsoft.Powershell --source winget
 # Firefox config
 
 
-# Screenshor of settinf=gd from apps:
+# Screenshot of settinf=gd from apps:
 
 
 # Download latest important drivers (For dell XPS - make sure to get wifi driver)
