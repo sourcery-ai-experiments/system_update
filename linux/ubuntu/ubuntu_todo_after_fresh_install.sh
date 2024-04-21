@@ -844,7 +844,7 @@ sudo chown clamav /var/log/clamav.log
 # OnAccessPrevention yes
 # OnAccessDisableDDD yes
 
-###########################################################3
+###########################################################
 # Safing Portmaster
 # Obfuscate for quickly hiding parts or writing on images
 # Nitroshare for file sharing over ethernet, etc
