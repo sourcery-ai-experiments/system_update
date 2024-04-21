@@ -342,7 +342,7 @@ sudo apt install -y gnome-browser-connector
 
 # Find out the latest version first
 sudo apt install -y python3.12
-pip install --upgrade pip
+sudo pip install --upgrade pip
 
 # DO NOT DO THE FOLLOWING 
 # as ubuntu starts misbehaving when default python is touched
