@@ -342,6 +342,7 @@ sudo apt install -y gnome-browser-connector
 
 # Find out the latest version first
 sudo apt install -y python3.12
+sudo pip install --upgrade pip
 
 # DO NOT DO THE FOLLOWING 
 # as ubuntu starts misbehaving when default python is touched
@@ -435,6 +436,7 @@ sudo flatpak install tor-browser
 # Only for laptop - Improve Laptop Battery:
 # sudo apt install -y tlp tlp-rdw
 # sudo tlp start
+# Also check TLP-UI and TLP-RDW
 
 # Install VLC 
 sudo apt install -y vlc
@@ -463,6 +465,7 @@ sudo apt install -y synaptic
 # Open as root
 # Run if PC feels slow
 sudo apt install -y bleachbit
+# sudo apt install -y stacer # Another system cleaner
 
 # Can install Spotify using apt or flatpak. Flatpak example below
 flatpak install -y flathub com.spotify.Client
@@ -484,7 +487,15 @@ sudo apt install -y ufw
 
 # Install any of the following as needed
 # sudo apt install -y gimp gparted cargo curl wget unrar unzip 
-# sudo apt install -y libreoffice kdenlive simplescreenrecorder stacer
+
+# sudo apt install -y libreoffice
+# libreoffice --writer # To open ms office equivalent app
+
+# sudo apt install -y simplescreenrecorder
+# sudo apt install -y kdenlive # Video editor
+# sudo apt install -y playonlinux winbind # For installing windows apps on linux # This kept giving me python errors, but flatpak worked
+# winapps / wine / lutris / proton are alternatives to playonlinux. Use whatever is best use case per
+flatpak install -y flathub com.playonlinux.PlayOnLinux4
 
 ###########################################
 ###########################################
@@ -582,7 +593,8 @@ sudo ufw default allow outgoing
 sudo ufw enable
 #sudo systemctl enable ufw # Didn't work for some reason
 #sudo systemctl start ufw # Didn't work for some reason
-
+# sudo ufw status numbered
+# sudo ufw delete 7 # Use numbers from above numbered command
 
 # AppArmor
 # https://ubuntu.com/server/docs/security-apparmor
@@ -608,6 +620,63 @@ echo ". torsocks on" >> ~/.zshrc
 # For changing tor config:
 sudo nano /etc/tor/torrc
 sudo systemctl reload tor
+
+##########################################
+
+### Users
+# Reference: https://learnubuntu.com/list-users/
+
+# to see all users
+cat /etc/passwd
+getent passwd
+
+getent passwd | wc -l # count of users
+getent passwd > user_list.txt # create a copy/file of list of users
+
+
+
+
+# only usernames (first col)
+cat /etc/passwd | cut -d: -f1
+cat /etc/passwd | awk -F: '{print $1}'
+getent passwd | cut -d: -f1
+compgen -u
+
+# Check if a username exists on the system:
+getent passwd : grep user_name
+
+# List normal users only (for scripting)
+eval getent passwd {$(awk '/^UID_MIN/ {print $2}' /etc/login.defs)..$(awk '/^UID_MAX/ {print $2}' /etc/login.defs)} | cut -d: -f1
+
+# List currently logged in users
+who
+users
+
+# Currently login session user
+whoami
+
+# Not recommended: To open shell as root, type (Will ask for password, which is by default un-set):
+su -
+
+# Instead access root as:
+sudo -i # for commands
+gksu nautilus # for gui apps
+sudo su # opens shell as root
+
+## Log file of linux authentication activity
+sudo cat /var/log/auth.log
+
+## Remove ssh access for root user
+# Caution: Ensure that there exists another user that can ssh login
+# SSH config
+sudo nano /etc/ssh/ssh_config
+# AllowUsers # remove root from here
+# PermitRootLogin # set to no
+service ssh restart
+
+
+
+
 ###########################################
 ###########################################
 # App specific settings:
@@ -775,9 +844,10 @@ sudo chown clamav /var/log/clamav.log
 # OnAccessPrevention yes
 # OnAccessDisableDDD yes
 
+###########################################################
 # Safing Portmaster
-# Tails OS - portable persistant OS from USB for library
 # Obfuscate for quickly hiding parts or writing on images
+# Nitroshare for file sharing over ethernet, etc
 
 
 ###############################################3

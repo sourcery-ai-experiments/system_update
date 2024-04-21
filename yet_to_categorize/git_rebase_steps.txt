@@ -16,7 +16,4 @@ git rebase origin/master
 
 git push origin your-branch
 
-# git push origin LG-2976 -f
-
-git rebase steps.txt
-Displaying kubernetes_docker_commands.md.
+# git push origin ubuntu_branch_01 -f
