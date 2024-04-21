@@ -52,6 +52,7 @@ winget upgrade --id Microsoft.Powershell --source winget  # Installs if not alre
 # vscode config
 # pycharm config
 # Firefox config
+# Firefox plugin configs - ublock origin, sponsorblock, etc
 
 
 # Screenshot of settinf=gd from apps:

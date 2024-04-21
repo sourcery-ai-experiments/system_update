@@ -697,6 +697,7 @@ service ssh restart
     # Websitr Privacy Preferences - enable both options (sell/share data and do not track)
 
 # Ublock Origin - Enable relevant filters
+# https://github.com/mchangrh/yt-neuter - Add this filter to ublock origin
 
 ##### Tor Browser
 # Open "Tor Browser Launcher Settings" app -> enable "Download over System Tor"
@@ -744,6 +745,18 @@ service ssh restart
 
 ##### Chrome or Chromium
 # Open Chrome and disable diagnostics
+
+##### Privacy/youtube estensions - reference: https://www.youtube.com/watch?v=rteYHxcLCZk
+# https://github.com/mchangrh/yt-neuter
+#Return YouTube Dislike: https://returnyoutubedislike.com/
+#SponsorBlock: https://sponsor.ajay.app/
+#Dearrow (clickbait remover): https://dearrow.ajay.app/
+#Unhook: https://unhook.app/
+#uBlock Origin: https://ublockorigin.com/
+#uBO troubleshooting:   / megathread
+#uBO status: https://drhyperion451.github.io/does-...
+#Hide YouTube Shorts: https://github.com/gijsdev/ublock-hid...
+#NewPipe: https://newpipe.net/
 
 ###########################################
 ###########################################
