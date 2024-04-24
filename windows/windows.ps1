@@ -24,6 +24,9 @@ winget upgrade --id Microsoft.Powershell --source winget  # Installs if not alre
 # ExitNodes {ca}{us}{uk} StrictNodes 1
 
 
+## VSCodium - https://vscodium.com/
+winget install vscodium
+
 ###########################################################
 ## TO DO before windows re-installation:
 ###########################################################
