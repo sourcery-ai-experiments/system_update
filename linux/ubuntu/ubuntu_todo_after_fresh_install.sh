@@ -62,7 +62,7 @@ git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 # find . -name "*.md" -type f -delete
 # find . -name "*.txt" -type f -delete
 # find . -name "LICENSE" -type f -delete
-# But firrst verify without the -delete option like following:
+# But first verify without the -delete option like following:
 find . -name "*.bak" -type f
 
 fc-cache -fr # clear font cache
@@ -474,7 +474,7 @@ flatpak install -y flathub com.spotify.Client
 sudo apt install -y ufw
 
 # Run Windows applications on ubuntu - can use actual *.exe files
-# flatpak install flathub com.usebottles.bottles
+# flatpak install -y flathub com.usebottles.bottles
 # flatpak run com.usebottles.bottles
 
 # KDE Connect
