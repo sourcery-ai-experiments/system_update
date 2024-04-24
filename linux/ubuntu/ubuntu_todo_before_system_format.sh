@@ -13,3 +13,41 @@ apt list --installed > apt_list_installed_$(date +%Y-%m-%d_%H-%M-%S).txt
 flatpak list > flatpak_list_$(date +%Y-%m-%d_%H-%M-%S).txt
 snap list > snap_list_$(date +%Y-%m-%d_%H-%M-%S).txt
 
+# Backup the following from /home
+freshclam.conf
+Downloads
+clamd.conf
+clamav-milter.conf
+.zshrc.pre-oh-my-zsh
+.zshrc
+.zsh_history
+.zprofile
+.zcompdump-nbUbuntu-5.9.zwc
+.zcompdump-nbUbuntu-5.9
+.zcompdump
+.wget-hsts
+.themes # Optional - It would be actually better not to back this up, as you could start fresh with latest download (GTK-Master)
+.sudo_as_admin_successful
+.ssh
+.shell.pre-oh-my-zsh
+.python_history
+.profile
+.pki
+.pam_environment
+.oh-my-zsh
+.local # Delete this from backup and download latest later: /home/username/.local/share/fonts/nerd-fonts
+.lesshst
+.icons # Optional - It would be actually better not to back this up, as you could start fresh with latest download (Dracula)
+.gnupg
+.gitconfig
+.config
+.clamtk # prefs and db/freshclam.conf
+.bashrc
+.bash_logout
+.bash_history
+
+
+##### Export the following from specific apps:
+# pycharm - settings
+# VSCode or VSCodium - settings (profile)
+# Firefox and other browsers - bookmarks as json as well as html
