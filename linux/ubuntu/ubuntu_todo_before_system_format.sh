@@ -14,8 +14,14 @@ flatpak list > flatpak_list_$(date +%Y-%m-%d_%H-%M-%S).txt
 snap list > snap_list_$(date +%Y-%m-%d_%H-%M-%S).txt
 
 # Backup the following from /home
+# Also include any personal folders you may have created
 freshclam.conf
+Desktop
+Documents
 Downloads
+Music
+Pictures
+Videos
 clamd.conf
 clamav-milter.conf
 .zshrc.pre-oh-my-zsh
@@ -35,16 +41,27 @@ clamav-milter.conf
 .pki
 .pam_environment
 .oh-my-zsh
+.password-store
 .local # Delete this from backup and download latest later: /home/username/.local/share/fonts/nerd-fonts
 .lesshst
 .icons # Optional - It would be actually better not to back this up, as you could start fresh with latest download (Dracula)
 .gnupg
 .gitconfig
+.fontconfig
 .config
 .clamtk # prefs and db/freshclam.conf
 .bashrc
 .bash_logout
 .bash_history
+signal-desktop-keyring.gpg
+.git-credentials
+.lesshst
+.pam_environment
+.profile
+.profile.bak
+
+### Backup the following directory, and delete things you don't need (to be defined)
+/etc
 
 
 ##### Export the following from specific apps:
