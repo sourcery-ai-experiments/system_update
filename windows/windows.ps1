@@ -85,3 +85,14 @@ winget install vscodium
 # Backup portable app folders like: adb
 
 
+
+#######################################################
+
+# Further reading topics and links:
+# https://github.com/maxwelleite/Win10-Initial-Setup-Script
+# https://github.com/Disassembler0/Win10-Initial-Setup-Script
+
+
+
+
+
