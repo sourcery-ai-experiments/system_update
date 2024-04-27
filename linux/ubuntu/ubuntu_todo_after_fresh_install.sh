@@ -1,5 +1,6 @@
 
-# The following steps were written based on Ubuntu 23.10 x86_64
+## Notes:
+# The following steps were written based on Ubuntu 24.04 (Dev) x86_64
 
 ###########################################
 ###########################################
@@ -9,7 +10,7 @@
 
 # OR just do 
 # Open "Software and Updates" 
-#    -> "Ubuntu Software" -> "Download from" -> "Server from US"
+#    -> "Ubuntu Software" -> "Download from" -> "Server from US" if you are in US
 
 # reboot
 
@@ -38,6 +39,31 @@ sudo apt install -y ubuntu-restricted-addons
 # Install some fonts
 # sudo apt install fonts-jetbrains-mono # Covered by nerd-fonts below, so skip this
 
+# https://needforbits.wordpress.com/2017/07/19/install-microsoft-windows-fonts-on-ubuntu-the-ultimate-guide/
+sudo apt install ttf-mscorefonts-installer # Windows Core fonts (2007) like Arial, Times New Roman, etc
+wget https://gist.github.com/maxwelleite/10774746/raw/ttf-vista-fonts-installer.sh -q -O - | sudo bash # Installs Microsoft’s ClearType fonts (Windows Vista Fonts) like Calibri, Consolas, etc
+wget https://gist.githubusercontent.com/maxwelleite/913b6775e4e408daa904566eb375b090/raw/cbfd8eb70184fa509fcab37dad7905676c93d587/ttf-ms-tahoma-installer.sh -q -O - | sudo bash # Install Tahoma fonts
+# install the full pack of Segoe UI fonts
+sudo mkdir -p /usr/share/fonts/truetype/msttcorefonts/
+cd /usr/share/fonts/truetype/msttcorefonts/
+sudo wget -q https://github.com/martinring/clide/blob/master/doc/fonts/segoeui.ttf?raw=true -O segoeui.ttf # regular
+sudo wget -q https://github.com/martinring/clide/blob/master/doc/fonts/segoeuib.ttf?raw=true -O segoeuib.ttf # bold
+sudo wget -q https://github.com/martinring/clide/blob/master/doc/fonts/segoeuib.ttf?raw=true -O segoeuii.ttf # italic
+sudo wget -q https://github.com/martinring/clide/blob/master/doc/fonts/segoeuiz.ttf?raw=true -O segoeuiz.ttf # bold italic
+sudo wget -q https://github.com/martinring/clide/blob/master/doc/fonts/segoeuil.ttf?raw=true -O segoeuil.ttf # light
+sudo wget -q https://github.com/martinring/clide/blob/master/doc/fonts/seguili.ttf?raw=true -O seguili.ttf # light italic
+sudo wget -q https://github.com/martinring/clide/blob/master/doc/fonts/segoeuisl.ttf?raw=true -O segoeuisl.ttf # semilight
+sudo wget -q https://github.com/martinring/clide/blob/master/doc/fonts/seguisli.ttf?raw=true -O seguisli.ttf # semilight italic
+sudo wget -q https://github.com/martinring/clide/blob/master/doc/fonts/seguisb.ttf?raw=true -O seguisb.ttf # semibold
+sudo wget -q https://github.com/martinring/clide/blob/master/doc/fonts/seguisbi.ttf?raw=true -O seguisbi.ttf # semibold italic
+fc-cache -f /usr/share/fonts/truetype/msttcorefonts/
+# WPS Office Fonts (Symbol fonts) - Will install them here: /usr/share/fonts/wps-fonts
+cd /tmp
+wget -O ttf-wps-fonts-master.zip https://github.com/IamDH4/ttf-wps-fonts/archive/master.zip
+unzip -LL ttf-wps-fonts-master.zip
+cd ttf-wps-fonts-master
+sudo ./install.sh
+
 # Also install these:
 # https://github.com/ryanoasis/nerd-fonts
 # https://github.com/powerline/fonts
@@ -62,10 +88,11 @@ git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 # find . -name "*.md" -type f -delete
 # find . -name "*.txt" -type f -delete
 # find . -name "LICENSE" -type f -delete
-# But firrst verify without the -delete option like following:
+# But first verify without the -delete option like following:
 find . -name "*.bak" -type f
 
 fc-cache -fr # clear font cache
+# sudo fc-cache -f -v # Find out difference
 fc-list | grep "JetBrains" # To check if jetbrains fond was installed successfully
 
 # ~/config/fontconfig/fonts.conf # Did not find this. Use GNOME Tweaks app instead
@@ -386,11 +413,22 @@ flatpak run com.vscodium.codium
 # Follow instructions here: https://www.jetbrains.com/help/pycharm/installation-guide.html
 # May need to run the following if opening toolbox app gives error:
 # sudo apt install -y libfuse2
-# Install Pycharm later below
-# If toolbox not needed, go for "Standalone installation". Remember to download Pycharm community edition
-sudo tar xzf pycharm-*.tar.gz -C /opt/
-cd /opt/pycharm-professional-2024.1/bin
-sh pycharm.sh
+# TLDR:
+sudo apt install libfuse2
+cd /opt/
+sudo tar -xvzf ~/Downloads/jetbrains-toolbox-1.xx.xxxx.tar.gz
+sudo mv jetbrains-toolbox-1.xx.xxxx jetbrains
+jetbrains/jetbrains-toolbox # Open JetBrains Toolbox (and installs?)
+
+# # Install Pycharm (Avoid on old/slow machines, and use VSCodium there instead): 
+# # If toolbox not needed, go for "Standalone installation" of pycharm. Remember to download Pycharm community edition
+# sudo tar xzf pycharm-*.tar.gz -C /opt/
+# cd /opt/pycharm-professional-2024.1/bin
+# sh pycharm.sh
+
+# If the above standalone installation doesn't seem to work, install pycharm flatpak (try to avoid snap Pycharm, it's slower)
+# flatpak install -y flathub com.jetbrains.PyCharm-Community
+# flatpak run com.jetbrains.PyCharm-Community
 
 ###########################################
 ###########################################
@@ -465,6 +503,7 @@ sudo apt install -y synaptic
 # Open as root
 # Run if PC feels slow
 sudo apt install -y bleachbit
+# https://docs.bleachbit.org/doc/command-line-interface.html
 # sudo apt install -y stacer # Another system cleaner
 
 # Can install Spotify using apt or flatpak. Flatpak example below
@@ -474,7 +513,7 @@ flatpak install -y flathub com.spotify.Client
 sudo apt install -y ufw
 
 # Run Windows applications on ubuntu - can use actual *.exe files
-# flatpak install flathub com.usebottles.bottles
+# flatpak install -y flathub com.usebottles.bottles
 # flatpak run com.usebottles.bottles
 
 # KDE Connect
@@ -516,64 +555,7 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 ###########################################
 ###########################################
 
-##### Settings
 
-# Network -> Click the gear box next to the connection in use -> IPV4 tab -> Disable "Automatic" for
-# DNS -> Paste the following in the box and apply:
-# 1.1.1.2, 1.0.0.2, 8.8.8.8, 1.1.1.1, 8.8.4.4, 1.0.0.1
-
-# Network -> Click the gear box next to the connection in use -> IPV6 tab -> "Additional DNS servers" -> Paste
-# the following in the box and apply:
-# 2606:4700:4700::1112, 2606:4700:4700::1002, 2001:4860:4860::8888, 2001:4860:4860::8844, 2606:4700:4700::1111, 2606:4700:4700::1001
-
-# Useful links abot DNS: 
-# https://developers.cloudflare.com/1.1.1.1/ip-addresses/
-# https://pkg.cloudflare.com/index.html
-# https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/dns-over-https-client/
-# https://developers.cloudflare.com/1.1.1.1/setup/linux/
-# https://developers.cloudflare.com/1.1.1.1/setup/router/
-# https://developers.cloudflare.com/1.1.1.1/other-ways-to-use-1.1.1.1/dns-over-tor/
-# https://blog.cloudflare.com/welcome-hidden-resolver/
-
-
-# Network -> Click the gear box next to the connection in use -> IPV6 tab -> "IPV6 Method" = Disabled (reduce attack surface area unless explicitly needed)
-
-# Appearance -> choose dark/light mode and background. Also choose color that matches the background
-
-# Ubuntu Desktop -> Desktop Icons -> Size = Small, Enable "Show Personal Folder"
-# Ubuntu Desktop -> Dock -> disable "Panel Mode", set icon size to around 20, "Position on screen = bottom"
-
-# Ubuntu Desktop -> Enhanced Tiling -> Enable
-
-# Search -> Search Results -> Disable everything except Settings and Software
-
-# Privacy -> Screen Lock -> Adjust to liking,
-# Privacy -> disable "Location Services"
-# Privacy -> Diagnostics -> Never
-
-# Online Accounts - Add whatever accounts I want to sync. Adding google shows Google Drive in Files
-
-# Sharing -> Set "Device Name"
-
-# Power -> Show Battery Percentage -> enable (For laptop)
-# Power -> Choose "performance" power mode, screen blank to lot more minutes, automatic suspend off
-
-# Displays -> Night Light -> Enable
-
-# Mouse & Touchpad -> Increase Pointer speed to around 75%
-
-# Users -> Choose user image
-
-# Default Apps - check and set
-
-# Date and Time - Set time format to AM/PM
-
-
-##### GNOME Tweaks
-
-# Top Bar -> Enable Seconds, Weekday
-
-#################################3
 
 
 ###########################################
@@ -811,6 +793,21 @@ sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean
 # TODO - Some commands and tools to read about
 # sudo apt dist-upgrade
 # SELinux
+# https://github.com/maxwelleite/ubuntu-post-install
+# https://github.com/snwh/ubuntu-post-install
+# Ubuntu built-in auto-install yaml 
+
+# https://github.com/maxwelleite/floccus
+# https://github.com/maxwelleite/ttf-wps-fonts
+
+# Safing Portmaster
+# Obfuscate for quickly hiding parts or writing on images
+# Nitroshare for file sharing over ethernet, etc
+
+
+###########################################
+###########################################
+
 # clamav and clamtk
 sudo apt install -y clamav clamav-daemon clamtk # Found clamtk to be very un-intuitive, but still install
 # Configure using - https://docs.clamav.net/manual/Usage/Configuration.html
@@ -857,11 +854,6 @@ sudo chown clamav /var/log/clamav.log
 # OnAccessPrevention yes
 # OnAccessDisableDDD yes
 
-###########################################################
-# Safing Portmaster
-# Obfuscate for quickly hiding parts or writing on images
-# Nitroshare for file sharing over ethernet, etc
-
 
 ###############################################3
 
@@ -886,3 +878,79 @@ poetry completions zsh > $ZSH_CUSTOM/plugins/poetry/_poetry
          #	poetry
          #	...
          #	)
+
+
+##########################################################
+
+# Reference :https://itsfoss.com/speed-up-ubuntu-1310/
+
+# Enable options at login time like recovery by making GRUB load time non zero
+sudo gedit /etc/default/grub
+# GRUB_TIMEOUT=2
+sudo update-grub # kind of reload
+
+# Delay startup apps by appending at the beginning sleep 20; like "flameshot" changes to "sleep 20;flameshot"
+
+# Install preload to speed up app load time
+sudo apt install preload
+
+# Choose the best mirror for software updates: 
+# This was the first step here where we chose best server. 
+sudo apt update
+
+# Use apt-fast instead of apt-get for a speedy update:
+sudo add-apt-repository ppa:apt-fast/stable
+sudo apt-get update
+sudo apt-get install apt-fast
+
+# Remove language-related sources from apt update:
+sudo gedit /etc/apt/apt.conf.d/00aptitude # Did not find this on my ubuntu
+# Acquire::Languages "none";
+
+# Reduce overheating (Laptop)
+sudo apt install indicator-cpufreq # For newer systems
+# For older systems:
+sudo apt update
+sudo apt install tlp tlp-rdw
+sudo tlp start
+
+# Use a lightweight desktop environment
+# Instead of GNOME, you may opt for a lightweight desktop environment like Xfce or LXDE, or even KDE
+
+# Use lighter alternatives for different applications
+# For example, use Gdebi to install packages. Use AbiWord instead of LibreOffice Writer etc.
+# VSCodium instead of Pycharm
+
+# Remove Unnecessary software
+sudo apt autoremove
+flatpak uninstall --unused
+
+# Remove Unnecessary GNOME Extensions
+
+# Use a system cleaner app like bleachbit or Stacer.
+
+# Free up space in /boot partition
+
+# Optimizing SSD Drive
+# sudo systemctl status fstrim.timer
+# sudo systemctl enable fstrim.timer
+
+# Remove Trash Periodically
+# Settings ⇾ Privacy ⇾ File History and Trash -> set Automatically Delete Trash Content
+
+# Use the Memory Saver Feature of Browsers
+# Chromium bassed - Tab Sleep/Memory Saver
+
+# Change Swappiness (Advanced)
+
+# Try out differnt values (Temporary)
+# cat /proc/sys/vm/swappiness 
+# Setting a low swappiness value like 10, 35 or 45, will reduce the chances of the system using swap, resulting in a faster performance.
+# sudo sysctl vm.swappiness=45 # 
+
+# To make this change permanent:
+# sudo nano /etc/sysctl.conf
+# vm.swappiness=45 
+
+
+

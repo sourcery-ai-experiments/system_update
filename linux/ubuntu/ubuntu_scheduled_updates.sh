@@ -16,7 +16,12 @@ sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean
 
 . torsocks on
 
-########################################3
+########################################
+
+apt satisfy
+apt full-upgrade
+
+########################################
 
 systemctl list-unit-files # Check status of systemctl services
 systemctl list-unit-files --state=running # running, enabled, disabled, masked, static, active
