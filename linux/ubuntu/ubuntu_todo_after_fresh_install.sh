@@ -85,6 +85,7 @@ echo $SHELL # To check current shell
 sudo apt install -y zsh fonts-font-awesome
 chsh -s $(which zsh) # sets zsh as default
 zsh
+# Looks like restarting terminal doesn't apply this change of default shell. But seems to work after a reboot.
 
 ###########################################
 ###########################################
@@ -135,10 +136,11 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 ## do the following changes:
 ## ZSH_THEME="robbyrussell" # comment this line
 #ZSH_THEME="agnoster"
-#zstyle ':omz:update' mode auto
-#zstyle ':omz:update' frequency 7
+#zstyle ':omz:update' mode auto # Uncomment this
+#zstyle ':omz:update' frequency 7 # Uncomment and change value
+#ENABLE_CORRECTION="true" # Uncomment - Give it a try
 #COMPLETION_WAITING_DOTS="true"
-#plugins=(git sudo debian safe-paste screen autojump github postgres docker pip python repo themes zsh-autosuggestions zsh-syntax-highlighting)
+#plugins=(git sudo debian safe-paste screen autojump github postgres docker pip python poetry repo themes zsh-autosuggestions zsh-syntax-highlighting)
 ## At the bottom of oh-my-zsh stuff:
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline"
 #ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
@@ -512,6 +514,9 @@ flatpak install -y flathub com.playonlinux.PlayOnLinux4
 
 # Enable "Minimize on Dock icon click"
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
+
+# Make Dock/Dash always visible (Might be already installed)
+# sudo apt install gnome-shell-extension-dashtodock -y # configure from gnome extensions manager
 
 ###########################################
 ###########################################
