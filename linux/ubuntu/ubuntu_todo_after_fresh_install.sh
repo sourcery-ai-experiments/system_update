@@ -413,6 +413,12 @@ flatpak run com.vscodium.codium
 # Follow instructions here: https://www.jetbrains.com/help/pycharm/installation-guide.html
 # May need to run the following if opening toolbox app gives error:
 # sudo apt install -y libfuse2
+# TLDR:
+sudo apt install libfuse2
+cd /opt/
+sudo tar -xvzf ~/Downloads/jetbrains-toolbox-1.xx.xxxx.tar.gz
+sudo mv jetbrains-toolbox-1.xx.xxxx jetbrains
+jetbrains/jetbrains-toolbox # Open JetBrains Toolbox (and installs?)
 
 # # Install Pycharm (Avoid on old/slow machines, and use VSCodium there instead): 
 # # If toolbox not needed, go for "Standalone installation" of pycharm. Remember to download Pycharm community edition
@@ -421,7 +427,7 @@ flatpak run com.vscodium.codium
 # sh pycharm.sh
 
 # If the above standalone installation doesn't seem to work, install pycharm flatpak (try to avoid snap Pycharm, it's slower)
-flatpak install -y flathub com.jetbrains.PyCharm-Community
+# flatpak install -y flathub com.jetbrains.PyCharm-Community
 # flatpak run com.jetbrains.PyCharm-Community
 
 ###########################################
@@ -497,6 +503,7 @@ sudo apt install -y synaptic
 # Open as root
 # Run if PC feels slow
 sudo apt install -y bleachbit
+# https://docs.bleachbit.org/doc/command-line-interface.html
 # sudo apt install -y stacer # Another system cleaner
 
 # Can install Spotify using apt or flatpak. Flatpak example below
