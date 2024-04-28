@@ -37,7 +37,7 @@ sudo apt install -y ubuntu-restricted-extras
 sudo apt install -y ubuntu-restricted-addons
 
 # Install some fonts
-# sudo apt install fonts-jetbrains-mono # Covered by nerd-fonts below, so skip this
+# sudo apt install fonts-jetbrains-mono fonts-roboto fonts-cascadia-code fonts-firacode # Covered by nerd-fonts below, so skip this
 
 # https://needforbits.wordpress.com/2017/07/19/install-microsoft-windows-fonts-on-ubuntu-the-ultimate-guide/
 sudo apt install ttf-mscorefonts-installer # Windows Core fonts (2007) like Arial, Times New Roman, etc
@@ -296,16 +296,43 @@ flatpak update # Updates every outdated Flatpak package
 ###########################################
 ###########################################
 
+# remove snap firefox and install deb firefox
 # Do this now because Firefox will be needed during the installing steps for general searching, version check, etc
-# remove snap firefox and install flatpak firefox
-
 sudo snap remove firefox
-sudo flatpak install flathub org.mozilla.firefox
-flatpak run org.mozilla.firefox
+rm -r ~/snap/firefox
+
+# sudo flatpak install flathub org.mozilla.firefox
+# flatpak run org.mozilla.firefox
+
+# https://support.mozilla.org/en-US/kb/install-firefox-linux
+# Copying steps from above link here because I need to be able to run these steps after removing snap firefox
+sudo install -d -m 0755 /etc/apt/keyrings # Create a directory to store APT repository keys if it doesn't exist
+sudo apt install wget
+wget -q https://packages.mozilla.org/apt/repo-signing-key.gpg -O- | sudo tee /etc/apt/keyrings/packages.mozilla.org.asc > /dev/null # Import the Mozilla APT repository signing key
+gpg -n -q --import --import-options import-show /etc/apt/keyrings/packages.mozilla.org.asc | awk '/pub/{getline; gsub(/^ +| +$/,""); if($0 == "35BAA0B33E9EB396F59CA838C0BA5CE6DC6315A3") print "\nThe key fingerprint matches ("$0").\n"; else print "\nVerification failed: the fingerprint ("$0") does not match the expected one.\n"}' # Check the fingerprint from above command
+echo "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main" | sudo tee -a /etc/apt/sources.list.d/mozilla.list > /dev/null # add the Mozilla APT repository to your sources list
+# Configure APT to prioritize packages from the Mozilla repository
+echo '
+Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: 1000
+' | sudo tee /etc/apt/preferences.d/mozilla
+
+sudo apt update -y && sudo apt install -y firefox #  install the Firefox .deb package
 
 # pin firefox again to Dash/Dock
 
 # Login -> Let it stay open for a while as everything syncs and extensions install
+
+###########################################
+###########################################
+
+# Remove apps that you don't use:
+
+# Thunderbird
+sudo snap remove thunderbird
+rm -r ~/snap/thunderbird
+
 
 ###########################################
 ###########################################
@@ -402,10 +429,22 @@ sudo apt install -y openjdk-22-jdk
 # sudo apt install -y apt-transport-https
 # sudo apt install -y code # or code-insiders
 
-# VSCodium
-# Open-source vscode - Install this instead - https://github.com/vscodium/vscodium/
-flatpak install flathub com.vscodium.codium
-flatpak run com.vscodium.codium
+### VSCodium
+# Flatpak is easier to install, but I could not get zsh working with it. So install using external repo
+
+# Open-source vscode - https://github.com/vscodium/vscodium/
+# flatpak install flathub com.vscodium.codium # install it
+# flatpak run com.vscodium.codium # run it
+# sudo flatpak uninstall com.vscodium.codium # uninstall it
+
+sudo wget https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg -O /usr/share/keyrings/vscodium-archive-keyring.asc
+echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.asc ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' | sudo tee /etc/apt/sources.list.d/vscodium.list
+sudo apt update
+sudo apt install codium
+# sudo apt remove codium
+# sudo rm /usr/share/keyrings/vscodium-archive-keyring.asc
+# sudo rm /etc/apt/sources.list.d/vscodium.list
+# rm -r ~/.config/VSCodium
 
 ###########################################
 ###########################################
@@ -569,6 +608,9 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
 # Privacy and Security
 #- disable diagnostic data, etc in OS as well as apps
 
+# disable Ubuntu backend reporting
+sudo ubuntu-report -f send no
+
 # UFW
 # Recommended rules from https://christitus.com/linux-security-mistakes/
 sudo ufw limit 22/tcp
@@ -712,6 +754,27 @@ service ssh restart
 ##### vscode
 # Set "JetbrainsMono Nerd Font" as default editor font
 # set latest python as interpreter
+# Check if "codium" opens VSCodium first from terminal
+
+### Git
+# https://stackoverflow.com/a/36644561/7524805
+# https://www.roboleary.net/vscode/2020/09/15/vscode-git.html
+# git config --global core.editor "codium --wait" # Works when you install vscodium as deb/rpm package
+# git config --global -e # Open git config file to test if the above change worked.
+# Add the following to the opened gitconfig file to set vscodium as default diff tool:
+# [user]
+# 	name = <enter name>
+# 	email = <get this from github>@users.noreply.github.com
+# [core]
+# 	editor = codium --wait
+# [diff]
+#   tool = vscodium
+# [difftool "vscodium"]
+#   cmd = codium --wait --diff $LOCAL $REMOTE
+# [merge]
+#   tool = vscodium
+# [mergetool "vscodium"]
+#   cmd = codium --wait $MERGED
 
 ##### Firefox:
 # Login
@@ -733,7 +796,7 @@ service ssh restart
 ##### Chrome or Chromium
 # Open Chrome and disable diagnostics
 
-##### Privacy/youtube estensions - reference: https://www.youtube.com/watch?v=rteYHxcLCZk
+##### Privacy/youtube extensions - reference: https://www.youtube.com/watch?v=rteYHxcLCZk
 # https://github.com/mchangrh/yt-neuter
 #Return YouTube Dislike: https://returnyoutubedislike.com/
 #SponsorBlock: https://sponsor.ajay.app/
@@ -903,13 +966,13 @@ sudo apt install preload
 # This was the first step here where we chose best server. 
 sudo apt update
 
-# Use apt-fast instead of apt-get for a speedy update:
-sudo add-apt-repository ppa:apt-fast/stable
-sudo apt-get update
-sudo apt-get install apt-fast
+# Use apt-fast instead of apt for a speedy update:
+# sudo add-apt-repository ppa:apt-fast/stable
+# sudo apt update
+# sudo apt install apt-fast
 
 # Remove language-related sources from apt update:
-sudo gedit /etc/apt/apt.conf.d/00aptitude # Did not find this on my ubuntu
+# sudo gedit /etc/apt/apt.conf.d/00aptitude # Did not find this on my ubuntu
 # Acquire::Languages "none";
 
 # Reduce overheating (Laptop)
