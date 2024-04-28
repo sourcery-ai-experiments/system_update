@@ -284,14 +284,7 @@ sudo snap refresh # updates all snap apps
 ###########################################
 ###########################################
 
-# Refer this for latest instructions: https://flathub.org/setup/Ubuntu
-# Install flatpak and enable Flathub
-sudo apt install -y gnome-software-plugin-flatpak flatpak
-# flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-# https://flathub.org/
-flatpak update # Updates every outdated Flatpak package
-# reboot
+# Install Flatpak/flathub (Refer flatpak directory in this repo)
 
 ###########################################
 ###########################################
@@ -300,9 +293,6 @@ flatpak update # Updates every outdated Flatpak package
 # Do this now because Firefox will be needed during the installing steps for general searching, version check, etc
 sudo snap remove firefox
 rm -r ~/snap/firefox
-
-# sudo flatpak install flathub org.mozilla.firefox
-# flatpak run org.mozilla.firefox
 
 # https://support.mozilla.org/en-US/kb/install-firefox-linux
 # Copying steps from above link here because I need to be able to run these steps after removing snap firefox
@@ -430,13 +420,8 @@ sudo apt install -y openjdk-22-jdk
 # sudo apt install -y code # or code-insiders
 
 ### VSCodium
-# Flatpak is easier to install, but I could not get zsh working with it. So install using external repo
-
 # Open-source vscode - https://github.com/vscodium/vscodium/
-# flatpak install flathub com.vscodium.codium # install it
-# flatpak run com.vscodium.codium # run it
-# sudo flatpak uninstall com.vscodium.codium # uninstall it
-
+# Flatpak is easier to install, but I could not get zsh working with it. So install using external repo
 sudo wget https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg -O /usr/share/keyrings/vscodium-archive-keyring.asc
 echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.asc ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' | sudo tee /etc/apt/sources.list.d/vscodium.list
 sudo apt update
@@ -468,8 +453,6 @@ jetbrains/jetbrains-toolbox # Open JetBrains Toolbox (and installs?)
 # sh pycharm.sh
 
 # If the above standalone installation doesn't seem to work, install pycharm flatpak (try to avoid snap Pycharm, it's slower)
-# flatpak install -y flathub com.jetbrains.PyCharm-Community
-# flatpak run com.jetbrains.PyCharm-Community
 
 ###########################################
 ###########################################
@@ -486,6 +469,42 @@ jetbrains/jetbrains-toolbox # Open JetBrains Toolbox (and installs?)
 # Install GNOME Tweaks
 # Open "App Center" -> Search "GNOME Tweaks" and install "GNOME Tweaks" by "The GNOME Project"
 # Settings within it are explained below
+
+###########################################
+###########################################
+
+# Install Tor
+#https://support.torproject.org/apt/tor-deb-repo/
+#https://support.torproject.org/apt/
+#https://support.torproject.org/rpm/
+#https://itsfoss.com/install-tar-browser-linux/
+dpkg --print-architecture # ARCHITECTURE - Verify the CPU architecture - returns amd64 for Intel i3, i5, i7
+lsb_release -c # DISTRIBUTION - Check distribution - returns noble for Ubuntu 40
+cat /etc/debian_version # DISTRIBUTION - Check base debian distribution - returns trixie/sid for Ubuntu 40
+apt install apt-transport-https
+sudo nano /etc/apt/sources.list.d/tor.list # Create this file  and paste the following in te file (replace DISTRIBUTION with appropriate architecture):
+
+### For debian - not sure if this is to be used for ubuntu too. TODO - check
+#   deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org <DISTRIBUTION> main
+#   deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org <DISTRIBUTION> main
+### Following is mentioned for ubuntu, but for 32 bit versions, maybe to be used with 64 bit also? TODO - check
+#   deb     [arch=<ARCHITECTURE> signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org focal main
+#   deb-src [arch=<ARCHITECTURE> signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org focal main
+
+### So, maybe try till something works in following order: TODO - check
+# Option 1
+#   deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org noble main
+#   deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org noble main
+### Option 2 - So maybe try this (Also changed focal to noble):
+#   deb     [arch=amd64 signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org noble main
+#   deb-src [arch=amd64 signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org noble main
+### Option 3
+#   deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org trixie/sid main
+#   deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org trixie/sid main
+
+wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
+sudo apt update
+sudo apt install tor deb.torproject.org-keyring
 
 ###########################################
 ###########################################
@@ -507,10 +526,6 @@ sudo apt install -y htop plocate
 
 # Useful to check system info in cool way
 sudo apt install -y neofetch
-
-# Install tor browser
-sudo apt install tor
-sudo flatpak install tor-browser
 
 # Only for laptop - Improve Laptop Battery:
 # sudo apt install -y tlp tlp-rdw
@@ -547,15 +562,8 @@ sudo apt install -y bleachbit
 # https://docs.bleachbit.org/doc/command-line-interface.html
 # sudo apt install -y stacer # Another system cleaner
 
-# Can install Spotify using apt or flatpak. Flatpak example below
-flatpak install -y flathub com.spotify.Client
-
 # Firewall
 sudo apt install -y ufw
-
-# Run Windows applications on ubuntu - can use actual *.exe files
-# flatpak install -y flathub com.usebottles.bottles
-# flatpak run com.usebottles.bottles
 
 # KDE Connect
 # find out
@@ -568,14 +576,16 @@ sudo apt install -y ufw
 # Install any of the following as needed
 # sudo apt install -y gimp gparted cargo curl wget unrar unzip 
 
-# sudo apt install -y libreoffice
-# libreoffice --writer # To open ms office equivalent app
+# To ms office equivalent open source app
+# Apache OpenOffice - https://www.openoffice.org/
+# LibreOffice - https://www.libreoffice.org/
+# sudo apt install -y libreoffice # Already comes installed
+# libreoffice --writer # Opens MS Word equivalent app
 
 # sudo apt install -y simplescreenrecorder
 # sudo apt install -y kdenlive # Video editor
 # sudo apt install -y playonlinux winbind # For installing windows apps on linux # This kept giving me python errors, but flatpak worked
 # winapps / wine / lutris / proton are alternatives to playonlinux. Use whatever is best use case per
-flatpak install -y flathub com.playonlinux.PlayOnLinux4
 
 ###########################################
 ###########################################
@@ -709,6 +719,16 @@ service ssh restart
 ###########################################
 ###########################################
 # App specific settings:
+
+# unattended-upgrades
+# https://www.linuxcapable.com/how-to-configure-unattended-upgrades-on-ubuntu-linux/
+sudo unattended-upgrades --dry-run --debug # Verifying that the Unattended Upgrades Package is working correctly
+systemctl status unattended-upgrades # check the status after making changes or restarting
+sudo nano /etc/apt/apt.conf.d/50unattended-upgrades # Configure here
+# sudo systemctl stop unattended-upgrades
+# sudo systemctl disable unattended-upgrades
+# sudo systemctl enabe unattended-upgrades
+sudo systemctl restart unattended-upgrades
 
 ##### Firefox:
 
@@ -986,8 +1006,7 @@ sudo tlp start
 # Instead of GNOME, you may opt for a lightweight desktop environment like Xfce or LXDE, or even KDE
 
 # Use lighter alternatives for different applications
-# For example, use Gdebi to install packages. Use AbiWord instead of LibreOffice Writer etc.
-# VSCodium instead of Pycharm
+# For example VSCodium instead of Pycharm
 
 # Remove Unnecessary software
 sudo apt autoremove
@@ -1020,5 +1039,20 @@ flatpak uninstall --unused
 # sudo nano /etc/sysctl.conf
 # vm.swappiness=45 
 
+#################################################################
+# Custom linux aliases - add to ~/.zshrc
+#################################################################
 
+# Application shortcuts:
+alias codium="flatpak run com.vscodium.codium "
+
+# Update/Upgrade related:
+alias nbupdate="sudo apt update -y && sudo apt upgrade -y && flatpak update -y && sudo snap refresh && sudo freshclam && omz update -y"
+alias nbdistu="sudo apt dist-upgrade -y && sudo do-release-upgrade"
+alias nbreload="systemctl daemon-reload && source .zshrc"
+alias nbclean="sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean && flatpak uninstall --unused"
+alias nbtoron=". torsocks on"
+alias nbtoroff=". torsocks off"
+
+#################################################################
 
