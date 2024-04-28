@@ -712,6 +712,27 @@ service ssh restart
 ##### vscode
 # Set "JetbrainsMono Nerd Font" as default editor font
 # set latest python as interpreter
+# Check if "codium" opens VSCodium first from terminal
+
+### Git
+# https://stackoverflow.com/a/36644561/7524805
+# https://www.roboleary.net/vscode/2020/09/15/vscode-git.html
+# git config --global core.editor "codium --wait" # Works when you install vscodium as deb/rpm package
+# git config --global -e # Open git config file to test if the above change worked.
+# Add the following to the opened gitconfig file to set vscodium as default diff tool:
+# [user]
+# 	name = <enter name>
+# 	email = <get this from github>@users.noreply.github.com
+# [core]
+# 	editor = codium --wait
+# [diff]
+#   tool = vscodium
+# [difftool "vscodium"]
+#   cmd = codium --wait --diff $LOCAL $REMOTE
+# [merge]
+#   tool = vscodium
+# [mergetool "vscodium"]
+#   cmd = codium --wait $MERGED
 
 ##### Firefox:
 # Login
@@ -733,7 +754,7 @@ service ssh restart
 ##### Chrome or Chromium
 # Open Chrome and disable diagnostics
 
-##### Privacy/youtube estensions - reference: https://www.youtube.com/watch?v=rteYHxcLCZk
+##### Privacy/youtube extensions - reference: https://www.youtube.com/watch?v=rteYHxcLCZk
 # https://github.com/mchangrh/yt-neuter
 #Return YouTube Dislike: https://returnyoutubedislike.com/
 #SponsorBlock: https://sponsor.ajay.app/
