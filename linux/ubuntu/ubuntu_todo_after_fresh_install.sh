@@ -402,10 +402,22 @@ sudo apt install -y openjdk-22-jdk
 # sudo apt install -y apt-transport-https
 # sudo apt install -y code # or code-insiders
 
-# VSCodium
-# Open-source vscode - Install this instead - https://github.com/vscodium/vscodium/
-flatpak install flathub com.vscodium.codium
-flatpak run com.vscodium.codium
+### VSCodium
+# Flatpak is easier to install, but I could not get zsh working with it. So install using external repo
+
+# Open-source vscode - https://github.com/vscodium/vscodium/
+# flatpak install flathub com.vscodium.codium # install it
+# flatpak run com.vscodium.codium # run it
+# sudo flatpak uninstall com.vscodium.codium # uninstall it
+
+sudo wget https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg -O /usr/share/keyrings/vscodium-archive-keyring.asc
+echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.asc ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' | sudo tee /etc/apt/sources.list.d/vscodium.list
+sudo apt update
+sudo apt install codium
+# sudo apt remove codium
+# sudo rm /usr/share/keyrings/vscodium-archive-keyring.asc
+# sudo rm /etc/apt/sources.list.d/vscodium.list
+# rm -r ~/.config/VSCodium
 
 ###########################################
 ###########################################

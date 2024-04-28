@@ -19,10 +19,23 @@ sudo dnf install -y chromium
 
 ######################################################
 
-flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+### VSCodium
+# Flatpak is easier to install, but I could not get zsh orking with it. So install using external repo
 
-flatpak install -y flathub com.vscodium.codium
-# flatpak run com.vscodium.codium
+# flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo # Add flathub repo
+# flatpak install -y flathub com.vscodium.codium # Install it
+# flatpak run com.vscodium.codium # Run it
+# sudo flatpak uninstall com.vscodium.codium # uninstall it
+
+sudo rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
+printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
+sudo dnf install codium
+# codium # to run it
+
+# Uninstall
+# sudo dnf remove codium
+# sudo rm /etc/yum.repos.d/vscodium.repo
+
 
 
 flatpak install -y flathub com.jetbrains.PyCharm-Community
