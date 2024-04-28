@@ -1049,7 +1049,7 @@ alias codium="flatpak run com.vscodium.codium "
 # Update/Upgrade related:
 alias nbupdate="sudo apt update -y && sudo apt upgrade -y && flatpak update -y && sudo snap refresh && sudo freshclam && omz update -y"
 alias nbdistu="sudo apt dist-upgrade -y && sudo do-release-upgrade"
-alias nbreload="systemctl daemon-reload && source .zshrc"
+alias nbreload="systemctl daemon-reload && source ~/.zshrc"
 alias nbclean="sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean && flatpak uninstall --unused"
 alias nbtoron=". torsocks on"
 alias nbtoroff=". torsocks off"
