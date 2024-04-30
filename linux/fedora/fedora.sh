@@ -1,4 +1,9 @@
 
+# The following has been tested on:
+# Fedora Linux 40 (Workstation Edition) x86_64
+
+#######################################################
+
 sudo dnf update -y
 sudo dnf upgrade -y
 
