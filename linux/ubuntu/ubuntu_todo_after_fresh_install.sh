@@ -479,8 +479,8 @@ jetbrains/jetbrains-toolbox # Open JetBrains Toolbox (and installs?)
 #https://support.torproject.org/rpm/
 #https://itsfoss.com/install-tar-browser-linux/
 dpkg --print-architecture # ARCHITECTURE - Verify the CPU architecture - returns amd64 for Intel i3, i5, i7
-lsb_release -c # DISTRIBUTION - Check distribution - returns noble for Ubuntu 40
-cat /etc/debian_version # DISTRIBUTION - Check base debian distribution - returns trixie/sid for Ubuntu 40
+lsb_release -c # DISTRIBUTION - Check distribution - returns noble for Ubuntu 24
+cat /etc/debian_version # DISTRIBUTION - Check base debian distribution - returns trixie/sid for Ubuntu 24
 apt install apt-transport-https
 sudo nano /etc/apt/sources.list.d/tor.list # Create this file  and paste the following in te file (replace DISTRIBUTION with appropriate architecture):
 
