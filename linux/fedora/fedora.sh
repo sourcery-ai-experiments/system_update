@@ -1,4 +1,9 @@
 
+# The following has been tested on:
+# Fedora Linux 40 (Workstation Edition) x86_64
+
+#######################################################
+
 sudo dnf update -y
 sudo dnf upgrade -y
 
@@ -123,6 +128,21 @@ crontab -e
 
 
 
+#################################################################
+# Custom linux aliases - add to ~/.zshrc
+#################################################################
 
+# Application shortcuts:
+alias codium="flatpak run com.vscodium.codium "
+
+# Update/Upgrade related:
+alias nbupdate="sudo dnf update -y && sudo dnf upgrade -y && flatpak update -y && sudo freshclam && omz update -y"
+# alias nbdistu="sudo apt dist-upgrade -y && sudo do-release-upgrade"
+alias nbreload="systemctl daemon-reload && source ~/.zshrc"
+alias nbclean="dnf clean -y all && flatpak uninstall --unused"
+# alias nbtoron=". torsocks on"
+# alias nbtoroff=". torsocks off"
+
+#################################################################
 
 
