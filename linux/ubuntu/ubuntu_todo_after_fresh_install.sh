@@ -434,10 +434,15 @@ sudo apt install -y openjdk-22-jdk
 ### VSCodium
 # Open-source vscode - https://github.com/vscodium/vscodium/
 # Flatpak is easier to install, but I could not get zsh working with it. So install using external repo
-sudo wget https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg -O /usr/share/keyrings/vscodium-archive-keyring.asc
-echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.asc ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' | sudo tee /etc/apt/sources.list.d/vscodium.list
-sudo apt update
-sudo apt install codium
+
+# https://vscodium.com/#install
+wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+    | gpg --dearmor \
+    | sudo dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
+echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main' \
+    | sudo tee /etc/apt/sources.list.d/vscodium.list
+sudo apt update && sudo apt install codium
+
 # sudo apt remove codium
 # sudo rm /usr/share/keyrings/vscodium-archive-keyring.asc
 # sudo rm /etc/apt/sources.list.d/vscodium.list
@@ -605,6 +610,14 @@ sudo apt install -y ufw
 # Gaming
 
 # Install Steam
+cd Downloads
+wget https://cdn.akamai.steamstatic.com/client/installer/steam.deb
+sudo apt install ./steam.deb
+sudo apt update && sudo apt upgrade
+
+# sudo apt install steam-installer # Another way to install
+
+
 # Steam -> Settings -> Steam Play -> Enable "Enable Steam Play for supported titles"
 # Steam -> Settings -> Steam Play -> Enable "Enable Steam Play for all other titles"
 # Steam -> Settings -> Steam Play -> Select the latest proton version from drop down
