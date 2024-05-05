@@ -471,6 +471,11 @@ jetbrains/jetbrains-toolbox # Open JetBrains Toolbox (and installs?)
 
 # If the above standalone installation doesn't seem to work, install pycharm flatpak (try to avoid snap Pycharm, it's slower)
 
+### Pycharm Un-install:
+# https://toolbox-support.jetbrains.com/hc/en-us/articles/115001313270-How-to-uninstall-Toolbox-App
+# https://www.jetbrains.com/help/pycharm/uninstall.html
+
+
 ###########################################
 ###########################################
 
@@ -612,8 +617,8 @@ sudo apt install -y ufw
 # Install Steam
 cd Downloads
 wget https://cdn.akamai.steamstatic.com/client/installer/steam.deb
-sudo apt install ./steam.deb
-sudo apt update && sudo apt upgrade
+sudo apt install -y ./steam.deb
+sudo apt update -y && sudo apt upgrade -y
 
 # sudo apt install steam-installer # Another way to install
 
@@ -917,6 +922,7 @@ sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean
 # Obfuscate for quickly hiding parts or writing on images
 # Nitroshare for file sharing over ethernet, etc
 
+# https://github.com/TedLeRoy/ubuntu-update.sh/blob/master/ubuntu-update.sh
 
 ###########################################
 ###########################################
@@ -1073,7 +1079,7 @@ alias codium="flatpak run com.vscodium.codium "
 
 # Update/Upgrade related:
 alias nbupdate="sudo apt update -y && sudo apt upgrade -y && flatpak update -y && sudo snap refresh && sudo freshclam && omz update -y"
-alias nbdistu="sudo apt dist-upgrade -y && sudo do-release-upgrade"
+alias nbdistu="sudo apt full-upgrade -y && sudo do-release-upgrade && sudo apt dist-upgrade -y"
 alias nbreload="systemctl daemon-reload && source ~/.zshrc"
 alias nbclean="sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean && flatpak uninstall --unused"
 alias nbtoron=". torsocks on"
