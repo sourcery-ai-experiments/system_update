@@ -443,6 +443,9 @@ echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https:/
     | sudo tee /etc/apt/sources.list.d/vscodium.list
 sudo apt update && sudo apt install codium
 
+# Settings/Config file path: 
+# ~/.config/VSCodium/User/settings.json
+
 # sudo apt remove codium
 # sudo rm /usr/share/keyrings/vscodium-archive-keyring.asc
 # sudo rm /etc/apt/sources.list.d/vscodium.list
