@@ -923,6 +923,7 @@ sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean
 # Nitroshare for file sharing over ethernet, etc
 
 # https://github.com/TedLeRoy/ubuntu-update.sh/blob/master/ubuntu-update.sh
+# https://help.ubuntu.com/community/AutoWeeklyUpdateHowTo
 
 ###########################################
 ###########################################
