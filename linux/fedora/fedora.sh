@@ -4,6 +4,20 @@
 
 #######################################################
 
+# Configurations to dnf
+# https://dnf.readthedocs.io/en/latest/conf_ref.html
+# sudo nano /etc/dnf/dnf.conf
+# fastestmirror=True
+# max_parallel_downloads=5
+# defaultyes=True
+
+# Another way
+# echo 'fastestmirror=1' | sudo tee -a /etc/dnf/dnf.conf
+# echo 'max_parallel_downloads=10' | sudo tee -a /etc/dnf/dnf.conf
+
+
+#######################################################
+
 sudo dnf update -y
 sudo dnf upgrade -y
 
