@@ -45,6 +45,9 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 # Install snap
 # sudo dnf install snapd # skip this
 
+# Set host-name (name the computer)
+sudo hostnamectl set-hostname "nbFedora"
+
 #######################################################
 
 sudo dnf update -y
