@@ -292,4 +292,62 @@ alias nbclean="dnf clean -y all && flatpak uninstall --unused"
 
 #################################################################
 
+### Settings
+
+
+# DNS:
+# Same as ubuntu
+
+# Privacy
+
+
+
+
+
+### Search in Super menu 
+# Same as ubuntu
+
+
+
+
+#################################################################
+
+### App specific Settings
+
+
+### Firefox Tweaks:
+# about:config
+# layers.acceleration.force-enabled
+# gfx.webrender.all
+
+### 
+
+################################################################
+
+### UI Customization
+
+# Themes
+# can find some on dnfdragora too
+# apply using GNOME Tweaks app
+
+# Icon Packs
+
+# App specific themes
+
+# Wallpaper
+
+
+################################################################
+
+# Better Fonts:
+sudo dnf copr enable dawid/better_fonts -y
+sudo dnf install fontconfig-font-replacements -y
+sudo dnf install fontconfig-enhanced-defaults -y
+
+# Change default fonts using GNOME Tweaks
+# Change app specific fonts 
+
+
+
+
 
