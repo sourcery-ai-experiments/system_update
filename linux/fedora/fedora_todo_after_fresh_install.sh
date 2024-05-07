@@ -48,6 +48,20 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 # Set host-name (name the computer)
 sudo hostnamectl set-hostname "nbFedora"
 
+
+# Firmware updates:
+sudo fwupdmgr refresh --force
+sudo fwupdmgr get-updates
+sudo fwupdmgr update
+
+
+# Install relavent Nvidia/AMD GPU drivers 
+# Search and install based on system
+
+
+sudo dnf update -y && sudo dnf upgrade --refresh -y
+# reboot
+
 #######################################################
 
 sudo dnf update -y
