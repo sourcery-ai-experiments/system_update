@@ -217,11 +217,11 @@ flatpak install -y flathub com.jetbrains.PyCharm-Community
 
 ########################################################
 
-sudo dnf install autojump   
-# Rest of the OMZ setup is same as on Ubuntu
-omz update
-source .zshrc 
-
+# Wine for installing Windows apps
+# sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/40/winehq.repo
+# sudo dnf install winehq-stable
+# wine --version
+# download Windows exe installer, and right click and open with wine to install them.
 
 ######################################################
 
