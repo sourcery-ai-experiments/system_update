@@ -85,23 +85,37 @@ sudo dnf install -y chromium
 ######################################################
 
 ### VSCodium
-# Flatpak is easier to install, but I could not get zsh orking with it. So install using external repo
+# Flatpak is easier to install, but I could not get zsh working with it. So install using external repo
 
 # flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo # Add flathub repo
 # flatpak install -y flathub com.vscodium.codium # Install it
 # flatpak run com.vscodium.codium # Run it
 # sudo flatpak uninstall com.vscodium.codium # uninstall it
 
+# https://vscodium.com/#install
 sudo rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
 printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
 sudo dnf install codium
+
 # codium # to run it
 
 # Uninstall
 # sudo dnf remove codium
 # sudo rm /etc/yum.repos.d/vscodium.repo
 
+#######################################################
 
+sudo dnf update -y
+sudo dnf upgrade -y
+
+# sudo dnf upgrade --refresh -y
+# sudo dnf install dnf-plugin-system-upgrade -y
+# sudo dnf system-upgrade download --releasever=40 -y
+
+# sudo dnf system-upgrade reboot -y
+
+# reboot
+######################################################
 
 flatpak install -y flathub com.jetbrains.PyCharm-Community
 # flatpak run com.jetbrains.PyCharm-Community
@@ -114,6 +128,7 @@ flatpak install -y flathub com.jetbrains.PyCharm-Community
 # sudo dnf distro-sync
 # dnf info
 # dnf list
+# dnf list installed # displays list of all installed packages
 # dnf search
 # dnf updateinfo
 # dnf upgrade
