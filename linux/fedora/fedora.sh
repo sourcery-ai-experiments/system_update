@@ -15,6 +15,28 @@
 # echo 'fastestmirror=1' | sudo tee -a /etc/dnf/dnf.conf
 # echo 'max_parallel_downloads=10' | sudo tee -a /etc/dnf/dnf.conf
 
+# Enable RPM Fusion
+# https://rpmfusion.org/Configuration
+
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+# If the above doesn't work, there is another GUI method in the link
+sudo dnf config-manager --enable fedora-cisco-openh264
+sudo dnf update -y && sudo dnf upgrade --refresh -y
+sudo dnf groupupdate core
+
+# Install Media Codecs
+# https://rpmfusion.org/Howto/Multimedia
+sudo dnf swap ffmpeg-free ffmpeg --allowerasing
+sudo dnf groupupdate multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf groupupdate sound-and-video
+sudo dnf install libva-intel-driver # This is for old intel chips, for others check the link
+
+# More codecs
+# https://docs.fedoraproject.org/en-US/quick-docs/installing-plugins-for-playing-movies-and-music/
+sudo dnf group install Multimedia
+# sudo dnf install gstreamer1-plugins-{base,good,bad,ugly,libav} gstreamer1-plugin-openh264 libdvdcss libdvdread # above contains this?
+
+
 
 #######################################################
 
