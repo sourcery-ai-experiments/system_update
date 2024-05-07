@@ -64,17 +64,22 @@ sudo dnf update -y && sudo dnf upgrade --refresh -y
 
 #######################################################
 
-sudo dnf update -y
-sudo dnf upgrade -y
+### Shell
 
-# sudo dnf upgrade --refresh -y
-# sudo dnf install dnf-plugin-system-upgrade -y
-# sudo dnf system-upgrade download --releasever=40 -y
+# bash
+sudo dnf install bash-completion
 
-# sudo dnf system-upgrade reboot -y
+# zsh
+sudo dnf install -y zsh autojump
+chsh -s $(which zsh) # set zsh as default
 
 
-######################################################
+# Rest of the OMZ setup is same as on Ubuntu
+omz update
+source .zshrc 
+
+
+#######################################################
 
 sudo dnf install zsh
 chsh -s $(which zsh)
