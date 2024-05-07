@@ -37,6 +37,13 @@ sudo dnf group install Multimedia
 # sudo dnf install gstreamer1-plugins-{base,good,bad,ugly,libav} gstreamer1-plugin-openh264 libdvdcss libdvdread # above contains this?
 
 
+# Enable fathub repo in flatpak (Not enabled by default in fedora)
+# https://flatpak.org/setup/Fedora
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+# flatpak remote-modify --enable flathub # A different way of doing the above?
+
+# Install snap
+# sudo dnf install snapd # skip this
 
 #######################################################
 
