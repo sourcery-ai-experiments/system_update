@@ -81,10 +81,77 @@ source .zshrc
 
 #######################################################
 
-sudo dnf install zsh
-chsh -s $(which zsh)
+### Install software
+
+# Install GNOME Tweaks
+sudo dnf install -y gnome-tweaks
+
+# Install Extensions Manager
+flatpak install flathub com.mattjakeman.ExtensionManager # Or install the GNOME Extensions app
+sudo dnf install -y gnome-browser-connector
+# Go to extensions.gnome.org and install the browser extension
+
+# Install useful things:
+sudo dnf install -y vlc htop neofetch gimp gparted bleachbit kdenlive transmission 
 
 sudo dnf install -y chromium
+
+
+
+# auto-cpufreq # Install for better battery management on laptops
+
+# Pachage manager (for fedora like what synaptic is for ubuntu)
+sudo dnf isntall -y dnfdragora
+
+# Speeds up opening of most used apps (avoid on low end or low RAM PCs)
+sudo dnf install -y preload 
+# sudo dnf copr enable elxreno/preload -y && sudo dnf install preload -y
+
+# To connect phone and PC
+sudo dnf install -y kdeconnectd 
+# Also check GSConnect GNOME extension
+# Install KDE Connect on android phone and connect both
+
+# sudo dnf install -y steam # If you wish to play games
+
+
+# # Set up automatic updates: (Read more and see if there are any better alternatives before installing this)
+# sudo dnf install -y dnf-automatic
+# sudo systemctl enable dnf-automatic.timer
+# sudo systemctl start dnf-automatic.timer
+
+# Find out more about this (what is this doing exactly?):
+# sudo dnf install fedore-workstation-repositories
+# sudo dnf config-manager --set-enabled google-chrome
+# sudo dnf install google-chrome-stable
+
+######################################################
+
+### Backups
+
+
+sudo dnf install -y timeshift # For backups
+
+######################################################
+
+# Web UI for system monitoring
+# sudo dnf install cockpit
+# sudo systemctl start cockpit
+# sudo systemctl enable cockpit
+# https://localhost:9090
+
+######################################################
+
+# Good software for running virtual machines:
+# KVM is a powerful tool
+# sudo dnf install -y qemu @Virtualization # Another tool
+
+######################################################
+
+# Remove unused software
+# Thunderbird
+# Boxes
+
 
 
 ######################################################
