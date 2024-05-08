@@ -48,6 +48,133 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 # Set host-name (name the computer)
 sudo hostnamectl set-hostname "nbFedora"
 
+
+# Firmware updates:
+sudo fwupdmgr refresh --force
+sudo fwupdmgr get-updates
+sudo fwupdmgr update
+
+
+# Install relavent Nvidia/AMD GPU drivers 
+# Search and install based on system
+
+
+sudo dnf update -y && sudo dnf upgrade --refresh -y
+# reboot
+
+#######################################################
+
+### Shell
+
+# bash
+sudo dnf install bash-completion
+
+# zsh
+sudo dnf install -y zsh autojump
+chsh -s $(which zsh) # set zsh as default
+
+
+# Rest of the OMZ setup is same as on Ubuntu
+omz update
+source .zshrc 
+
+
+#######################################################
+
+### Install software
+
+# Install GNOME Tweaks
+sudo dnf install -y gnome-tweaks
+
+# Install Extensions Manager
+flatpak install flathub com.mattjakeman.ExtensionManager # Or install the GNOME Extensions app
+sudo dnf install -y gnome-browser-connector
+# Go to extensions.gnome.org and install the browser extension
+
+# Install useful things:
+sudo dnf install -y vlc htop neofetch gimp gparted bleachbit kdenlive transmission 
+
+sudo dnf install -y chromium
+
+
+
+# auto-cpufreq # Install for better battery management on laptops
+
+# Pachage manager (for fedora like what synaptic is for ubuntu)
+sudo dnf isntall -y dnfdragora
+
+# Speeds up opening of most used apps (avoid on low end or low RAM PCs)
+sudo dnf install -y preload 
+# sudo dnf copr enable elxreno/preload -y && sudo dnf install preload -y
+
+# To connect phone and PC
+sudo dnf install -y kdeconnectd 
+# Also check GSConnect GNOME extension
+# Install KDE Connect on android phone and connect both
+
+# sudo dnf install -y steam # If you wish to play games
+
+
+# # Set up automatic updates: (Read more and see if there are any better alternatives before installing this)
+# sudo dnf install -y dnf-automatic
+# sudo systemctl enable dnf-automatic.timer
+# sudo systemctl start dnf-automatic.timer
+
+# Find out more about this (what is this doing exactly?):
+# sudo dnf install fedore-workstation-repositories
+# sudo dnf config-manager --set-enabled google-chrome
+# sudo dnf install google-chrome-stable
+
+######################################################
+
+### Backups
+
+
+sudo dnf install -y timeshift # For backups
+
+######################################################
+
+# Web UI for system monitoring
+# sudo dnf install cockpit
+# sudo systemctl start cockpit
+# sudo systemctl enable cockpit
+# https://localhost:9090
+
+######################################################
+
+# Good software for running virtual machines:
+# KVM is a powerful tool
+# sudo dnf install -y qemu @Virtualization # Another tool
+
+######################################################
+
+# Remove unused software
+# Thunderbird
+# Boxes
+
+
+
+######################################################
+
+### VSCodium
+# Flatpak is easier to install, but I could not get zsh working with it. So install using external repo
+
+# flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo # Add flathub repo
+# flatpak install -y flathub com.vscodium.codium # Install it
+# flatpak run com.vscodium.codium # Run it
+# sudo flatpak uninstall com.vscodium.codium # uninstall it
+
+# https://vscodium.com/#install
+sudo rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
+printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
+sudo dnf install codium
+
+# codium # to run it
+
+# Uninstall
+# sudo dnf remove codium
+# sudo rm /etc/yum.repos.d/vscodium.repo
+
 #######################################################
 
 sudo dnf update -y
@@ -59,35 +186,8 @@ sudo dnf upgrade -y
 
 # sudo dnf system-upgrade reboot -y
 
-
+# reboot
 ######################################################
-
-sudo dnf install zsh
-chsh -s $(which zsh)
-
-sudo dnf install -y chromium
-
-
-######################################################
-
-### VSCodium
-# Flatpak is easier to install, but I could not get zsh orking with it. So install using external repo
-
-# flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo # Add flathub repo
-# flatpak install -y flathub com.vscodium.codium # Install it
-# flatpak run com.vscodium.codium # Run it
-# sudo flatpak uninstall com.vscodium.codium # uninstall it
-
-sudo rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
-printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
-sudo dnf install codium
-# codium # to run it
-
-# Uninstall
-# sudo dnf remove codium
-# sudo rm /etc/yum.repos.d/vscodium.repo
-
-
 
 flatpak install -y flathub com.jetbrains.PyCharm-Community
 # flatpak run com.jetbrains.PyCharm-Community
@@ -100,6 +200,7 @@ flatpak install -y flathub com.jetbrains.PyCharm-Community
 # sudo dnf distro-sync
 # dnf info
 # dnf list
+# dnf list installed # displays list of all installed packages
 # dnf search
 # dnf updateinfo
 # dnf upgrade
@@ -116,11 +217,11 @@ flatpak install -y flathub com.jetbrains.PyCharm-Community
 
 ########################################################
 
-sudo dnf install autojump   
-# Rest of the OMZ setup is same as on Ubuntu
-omz update
-source .zshrc 
-
+# Wine for installing Windows apps
+# sudo dnf config-manager --add-repo https://dl.winehq.org/wine-builds/fedora/40/winehq.repo
+# sudo dnf install winehq-stable
+# wine --version
+# download Windows exe installer, and right click and open with wine to install them.
 
 ######################################################
 
@@ -190,5 +291,63 @@ alias nbclean="dnf clean -y all && flatpak uninstall --unused"
 # alias nbtoroff=". torsocks off"
 
 #################################################################
+
+### Settings
+
+
+# DNS:
+# Same as ubuntu
+
+# Privacy
+
+
+
+
+
+### Search in Super menu 
+# Same as ubuntu
+
+
+
+
+#################################################################
+
+### App specific Settings
+
+
+### Firefox Tweaks:
+# about:config
+# layers.acceleration.force-enabled
+# gfx.webrender.all
+
+### 
+
+################################################################
+
+### UI Customization
+
+# Themes
+# can find some on dnfdragora too
+# apply using GNOME Tweaks app
+
+# Icon Packs
+
+# App specific themes
+
+# Wallpaper
+
+
+################################################################
+
+# Better Fonts:
+sudo dnf copr enable dawid/better_fonts -y
+sudo dnf install fontconfig-font-replacements -y
+sudo dnf install fontconfig-enhanced-defaults -y
+
+# Change default fonts using GNOME Tweaks
+# Change app specific fonts 
+
+
+
 
 
