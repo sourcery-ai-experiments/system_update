@@ -20,6 +20,9 @@ sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean
 apt satisfy
 apt full-upgrade
 
+# About: The following upgrades have been deferred due to phasing
+# https://itsfoss.com/following-packages-have-been-kept-back/
+
 ########################################
 
 systemctl list-unit-files # Check status of systemctl services

@@ -780,6 +780,7 @@ sudo systemctl restart unattended-upgrades
 
 # Ublock Origin - Enable relevant filters
 # https://github.com/mchangrh/yt-neuter - Add this filter to ublock origin
+# https://github.com/StevenBlack/hosts - modify hosts file
 
 ##### Tor Browser
 # Open "Tor Browser Launcher Settings" app -> enable "Download over System Tor"
