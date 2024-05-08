@@ -96,7 +96,12 @@ sudo dnf install -y vlc htop neofetch gimp gparted bleachbit kdenlive transmissi
 
 sudo dnf install -y chromium
 
-
+# LibreWolf
+# https://librewolf.net/installation/
+# add the repo
+curl -fsSL https://rpm.librewolf.net/librewolf-repo.repo | pkexec tee /etc/yum.repos.d/librewolf.repo
+# install the package
+sudo dnf install -y librewolf
 
 # auto-cpufreq # Install for better battery management on laptops
 
