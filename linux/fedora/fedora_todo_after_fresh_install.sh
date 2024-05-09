@@ -119,6 +119,19 @@ sudo dnf install -y kdeconnectd
 
 # sudo dnf install -y steam # If you wish to play games
 
+# VLC
+# https://www.videolan.org/vlc/download-fedora.html
+# su -
+# dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+# dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+# dnf install vlc
+# dnf install python-vlc # (optional)
+
+# https://docs.fedoraproject.org/en-US/quick-docs/installing-and-running-vlc/
+sudo dnf install -y  vlc
+sudo dnf remove -y totem # Remove stock video player
+
+
 
 # # Set up automatic updates: (Read more and see if there are any better alternatives before installing this)
 # sudo dnf install -y dnf-automatic
