@@ -96,7 +96,12 @@ sudo dnf install -y vlc htop neofetch gimp gparted bleachbit kdenlive transmissi
 
 sudo dnf install -y chromium
 
-
+# LibreWolf
+# https://librewolf.net/installation/
+# add the repo
+curl -fsSL https://rpm.librewolf.net/librewolf-repo.repo | pkexec tee /etc/yum.repos.d/librewolf.repo
+# install the package
+sudo dnf install -y librewolf
 
 # auto-cpufreq # Install for better battery management on laptops
 
@@ -113,6 +118,19 @@ sudo dnf install -y kdeconnectd
 # Install KDE Connect on android phone and connect both
 
 # sudo dnf install -y steam # If you wish to play games
+
+# VLC
+# https://www.videolan.org/vlc/download-fedora.html
+# su -
+# dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+# dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+# dnf install vlc
+# dnf install python-vlc # (optional)
+
+# https://docs.fedoraproject.org/en-US/quick-docs/installing-and-running-vlc/
+sudo dnf install -y  vlc
+sudo dnf remove -y totem # Remove stock video player
+
 
 
 # # Set up automatic updates: (Read more and see if there are any better alternatives before installing this)
