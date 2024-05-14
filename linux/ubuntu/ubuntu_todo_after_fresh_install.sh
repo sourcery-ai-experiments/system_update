@@ -501,7 +501,6 @@ jetbrains/jetbrains-toolbox # Open JetBrains Toolbox (and installs?)
 # Install Tor
 #https://support.torproject.org/apt/tor-deb-repo/
 #https://support.torproject.org/apt/
-#https://support.torproject.org/rpm/
 #https://itsfoss.com/install-tar-browser-linux/
 dpkg --print-architecture # ARCHITECTURE - Verify the CPU architecture - returns amd64 for Intel i3, i5, i7
 lsb_release -c # DISTRIBUTION - Check distribution - returns noble for Ubuntu 24
