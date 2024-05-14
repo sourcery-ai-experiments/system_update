@@ -63,6 +63,8 @@ signal-desktop-keyring.gpg
 ### Backup the following directory, and delete things you don't need (to be defined)
 /etc
 
+/var/app # Flatpak stores apps here. Configs too.
+
 
 ##### Export the following from specific apps:
 # pycharm - settings
