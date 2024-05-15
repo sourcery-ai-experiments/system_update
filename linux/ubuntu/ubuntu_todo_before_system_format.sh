@@ -68,3 +68,5 @@ signal-desktop-keyring.gpg
 # pycharm - settings
 # VSCode or VSCodium - settings (profile)
 # Firefox and other browsers - bookmarks as json as well as html
+# Kodi - Install "Program Addons -> Backup" -> Make selections of what to backup and backup directory -> Hit backup
+
