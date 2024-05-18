@@ -4,6 +4,21 @@
 
 #######################################################
 
+### Shell
+
+# bash
+# sudo dnf install bash-completion
+
+# zsh
+sudo dnf install -y zsh autojump
+chsh -s $(which zsh) # set zsh as default
+
+# Rest of the OMZ setup is same as on Ubuntu
+omz update
+source .zshrc 
+
+#######################################################
+
 # Configurations to dnf
 # https://dnf.readthedocs.io/en/latest/conf_ref.html
 # sudo nano /etc/dnf/dnf.conf
@@ -64,19 +79,6 @@ sudo dnf update -y && sudo dnf upgrade --refresh -y
 
 #######################################################
 
-### Shell
-
-# bash
-sudo dnf install bash-completion
-
-# zsh
-sudo dnf install -y zsh autojump
-chsh -s $(which zsh) # set zsh as default
-
-
-# Rest of the OMZ setup is same as on Ubuntu
-omz update
-source .zshrc 
 
 
 #######################################################
