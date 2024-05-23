@@ -145,11 +145,6 @@ fc-list | grep "JetBrains" # To check if jetbrains fond was installed successful
 sudo apt install wget curl xclip autojump
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Configuring oh-my-zsh:
-nano .zshrc
-ZSH_THEME="agnoster" # (this is one of the fancy ones)
-
-
 
 # Interesting Built-in plugins:
 # debian, systemd, aliases, colored-man-pages, colorize,
