@@ -30,6 +30,37 @@ source .zshrc
 # echo 'fastestmirror=1' | sudo tee -a /etc/dnf/dnf.conf
 # echo 'max_parallel_downloads=10' | sudo tee -a /etc/dnf/dnf.conf
 
+sudo dnf update -y && sudo dnf upgrade --refresh -y
+
+#######################################################
+
+# Get this repo
+which git || sudo dnf install -y git # check if a package is already installed to avoid unnecessary operations
+mkdir -p ~/nb
+mkdir -p ~/nb/CodeProjects
+cd ~/nb/CodeProjects
+git clone https://github.com/nbhirud/system_update.git
+gedit system_update/linux/ubuntu/ubuntu_todo_after_fresh_install.sh
+
+#######################################################
+
+cd ~/nb/CodeProjects
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
+
+# delete using script
+
+#######################################################
+
+
+#######################################################
+
+#######################################################
+
+#######################################################
+
+#######################################################
+
+
 # Enable RPM Fusion
 # https://rpmfusion.org/Configuration
 
@@ -85,6 +116,12 @@ sudo dnf update -y && sudo dnf upgrade --refresh -y
 
 ### Install software
 
+sudo dnf install -y gh
+
+# https://fedoramagazine.org/two-factor-authentication-ssh-fedora/
+# sudo dnf install -y google-authenticator
+
+
 # Install GNOME Tweaks
 sudo dnf install -y gnome-tweaks
 
@@ -133,7 +170,8 @@ sudo dnf install -y kdeconnectd
 sudo dnf install -y  vlc
 sudo dnf remove -y totem # Remove stock video player
 
-
+# PeaZip for archive management
+# https://peazip.github.io/peazip-linux.html
 
 # # Set up automatic updates: (Read more and see if there are any better alternatives before installing this)
 # sudo dnf install -y dnf-automatic
@@ -298,7 +336,7 @@ sudo dnf upgrade -y
 # reboot
 ######################################################
 
-flatpak install -y flathub com.jetbrains.PyCharm-Community
+# flatpak install -y flathub com.jetbrains.PyCharm-Community
 # flatpak run com.jetbrains.PyCharm-Community
 
 # dnf install
@@ -334,7 +372,7 @@ flatpak install -y flathub com.jetbrains.PyCharm-Community
 
 ######################################################
 
-# rEFERENCE: https://www.linuxcapable.com/install-clamav-on-fedora-linux/
+# Reference: https://www.linuxcapable.com/install-clamav-on-fedora-linux/
 sudo dnf upgrade --refresh # Refresh Fedora System Packages
 # sudo dnf install -y clamav clamav-daemon clamtk 
 sudo dnf install clamav clamd clamav-update clamtk #  Install ClamAV  and ClamTK GUI
@@ -392,12 +430,12 @@ crontab -e
 alias codium="flatpak run com.vscodium.codium "
 
 # Update/Upgrade related:
-alias nbupdate="sudo dnf update -y && sudo dnf upgrade -y && flatpak update -y && sudo freshclam && omz update -y"
+alias nbupdate=". torsocks off && sudo dnf update -y && sudo dnf upgrade --refresh -y && flatpak update -y && sudo freshclam && omz update -y && . torsocks on"
 # alias nbdistu="sudo apt dist-upgrade -y && sudo do-release-upgrade"
 alias nbreload="systemctl daemon-reload && source ~/.zshrc"
 alias nbclean="dnf clean -y all && flatpak uninstall --unused"
-# alias nbtoron=". torsocks on"
-# alias nbtoroff=". torsocks off"
+alias nbtoron=". torsocks on"
+alias nbtoroff=". torsocks off"
 
 #################################################################
 
@@ -450,13 +488,16 @@ alias nbclean="dnf clean -y all && flatpak uninstall --unused"
 
 # Better Fonts:
 sudo dnf copr enable dawid/better_fonts -y
-sudo dnf install fontconfig-font-replacements -y
-sudo dnf install fontconfig-enhanced-defaults -y
+# sudo dnf install fontconfig-font-replacements -y
+# sudo dnf install fontconfig-enhanced-defaults -y
 
 # Change default fonts using GNOME Tweaks
 # Change app specific fonts 
 
 
 
+###############################################################
 
+# https://www.linuxcapable.com/how-to-install-kodi-on-fedora-linux/
+flatpak install -y flathub tv.kodi.Kodi
 
