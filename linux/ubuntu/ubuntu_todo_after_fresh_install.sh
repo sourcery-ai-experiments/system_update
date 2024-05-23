@@ -948,6 +948,12 @@ sudo apt -y autoclean && sudo apt -y autoremove && sudo apt -y clean
 # https://github.com/TedLeRoy/ubuntu-update.sh/blob/master/ubuntu-update.sh
 # https://help.ubuntu.com/community/AutoWeeklyUpdateHowTo
 
+# https://itsfoss.com/things-to-do-after-installing-ubuntu-24-04/
+
+# https://github.com/HorlogeSkynet/archey4
+
+# https://itsfoss.com/gedit-tweaks/
+
 ###########################################
 ###########################################
 
