@@ -488,13 +488,16 @@ alias nbtoroff=". torsocks off"
 
 # Better Fonts:
 sudo dnf copr enable dawid/better_fonts -y
-sudo dnf install fontconfig-font-replacements -y
-sudo dnf install fontconfig-enhanced-defaults -y
+# sudo dnf install fontconfig-font-replacements -y
+# sudo dnf install fontconfig-enhanced-defaults -y
 
 # Change default fonts using GNOME Tweaks
 # Change app specific fonts 
 
 
 
+###############################################################
 
+# https://www.linuxcapable.com/how-to-install-kodi-on-fedora-linux/
+flatpak install -y flathub tv.kodi.Kodi
 
