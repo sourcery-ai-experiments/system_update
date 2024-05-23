@@ -430,12 +430,12 @@ crontab -e
 alias codium="flatpak run com.vscodium.codium "
 
 # Update/Upgrade related:
-alias nbupdate="sudo dnf update -y && sudo dnf upgrade -y && flatpak update -y && sudo freshclam && omz update -y"
+alias nbupdate=". torsocks off && sudo dnf update -y && sudo dnf upgrade --refresh -y && flatpak update -y && sudo freshclam && omz update -y && . torsocks on"
 # alias nbdistu="sudo apt dist-upgrade -y && sudo do-release-upgrade"
 alias nbreload="systemctl daemon-reload && source ~/.zshrc"
 alias nbclean="dnf clean -y all && flatpak uninstall --unused"
-# alias nbtoron=". torsocks on"
-# alias nbtoroff=". torsocks off"
+alias nbtoron=". torsocks on"
+alias nbtoroff=". torsocks off"
 
 #################################################################
 
