@@ -5,6 +5,21 @@
 ###########################################
 ###########################################
 
+##### SHELL
+echo $SHELL # To check current shell
+# Did basic research of bash vs zsh vs fish and felt like zsh was the right one for me. Also, fish isn't POSIX
+# compliant. bash and zsh are mostly compatible with each other, but fish isn't.
+# sudo apt install zsh
+
+# https://itsfoss.com/zsh-ubuntu/
+sudo apt install -y zsh fonts-font-awesome
+chsh -s $(which zsh) # sets zsh as default
+zsh
+# Looks like restarting terminal doesn't apply this change of default shell. But seems to work after a reboot.
+
+###########################################
+###########################################
+
 # Open "Software and Updates" 
 #    -> "Ubuntu Software" -> "Download from" -> "Other" -> "Select Best Server" -> Choose if it says https, else keep clicking select best server
 
@@ -83,18 +98,12 @@ sudo ./install.sh
 cd ~/Downloads
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 
-# JetBrainsMono
-# Meslo
-# Hack
-# RobotoMono
-# SourceCodePro
-# FiraCode
-# Noto
-# Inconsolata
-# CascadiaCode
-# MartianMono
-# Copy above folders from patched-fonts dir into a new directory called "nerd_fonts" -> Delete all files that are
-# not either *.ttf or *.otf -> move the nerd_fonts directory to ~/.local/share/fonts
+
+
+# [nbhirud@nbFedora]~/Downloads/nerd-fonts% ls
+# AnonymousPro     CascadiaCode  CodeNewRoman     DejaVuSansMono  FiraCode  Gohu  HeavyData  IBMPlexMono  InconsolataGo   JetBrainsMono   Meslo   Mononoki              Noto          ProFont      RobotoMono     SpaceMono  Tinos   UbuntuMono
+# BigBlueTerminal  CascadiaMono  ComicShannsMono  EnvyCodeR       FiraMono  Hack  Hermit     Inconsolata  InconsolataLGC  LiberationMono  Monoid  NerdFontsSymbolsOnly  OpenDyslexic  ProggyClean  SourceCodePro  Terminus   Ubuntu  UbuntuSans
+# [nbhirud@nbFedora]~/Downloads/nerd-fonts% 
 
 # To delete unnecessary files, run the following:
 # find . -name "*.md" -type f -delete
@@ -102,6 +111,12 @@ git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 # find . -name "LICENSE" -type f -delete
 # But first verify without the -delete option like following:
 find . -name "*.bak" -type f
+
+# Copy above folders from patched-fonts dir into a new directory called "nerd_fonts" -> Delete all files that are
+# not either *.ttf or *.otf -> move the nerd_fonts directory to ~/.local/share/fonts:
+mkdir -p ~/.local/share/fonts # this fonts folder is absent by default
+cp ~/Downloads/nerd-fonts ~/.local/share/fonts/ -r
+rm ~/Downloads/nerd-fonts
 
 fc-cache -fr # clear font cache
 # sudo fc-cache -f -v # Find out difference
@@ -111,20 +126,6 @@ fc-list | grep "JetBrains" # To check if jetbrains fond was installed successful
 # set multiple <family> tags with different font families under <prefer> section
 # This is a way to set preferred font and fall-back fonts
 
-###########################################
-###########################################
-
-##### SHELL
-echo $SHELL # To check current shell
-# Did basic research of bash vs zsh vs fish and felt like zsh was the right one for me. Also, fish isn't POSIX
-# compliant. bash and zsh are mostly compatible with each other, but fish isn't.
-# sudo apt install zsh
-
-# https://itsfoss.com/zsh-ubuntu/
-sudo apt install -y zsh fonts-font-awesome
-chsh -s $(which zsh) # sets zsh as default
-zsh
-# Looks like restarting terminal doesn't apply this change of default shell. But seems to work after a reboot.
 
 ###########################################
 ###########################################
@@ -143,11 +144,6 @@ zsh
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Installing-ZSH
 sudo apt install wget curl xclip autojump
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Configuring oh-my-zsh:
-nano .zshrc
-ZSH_THEME="agnoster" # (this is one of the fancy ones)
-
 
 
 # Interesting Built-in plugins:
