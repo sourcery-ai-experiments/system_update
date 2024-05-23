@@ -5,6 +5,21 @@
 ###########################################
 ###########################################
 
+##### SHELL
+echo $SHELL # To check current shell
+# Did basic research of bash vs zsh vs fish and felt like zsh was the right one for me. Also, fish isn't POSIX
+# compliant. bash and zsh are mostly compatible with each other, but fish isn't.
+# sudo apt install zsh
+
+# https://itsfoss.com/zsh-ubuntu/
+sudo apt install -y zsh fonts-font-awesome
+chsh -s $(which zsh) # sets zsh as default
+zsh
+# Looks like restarting terminal doesn't apply this change of default shell. But seems to work after a reboot.
+
+###########################################
+###########################################
+
 # Open "Software and Updates" 
 #    -> "Ubuntu Software" -> "Download from" -> "Other" -> "Select Best Server" -> Choose if it says https, else keep clicking select best server
 
@@ -111,20 +126,6 @@ fc-list | grep "JetBrains" # To check if jetbrains fond was installed successful
 # set multiple <family> tags with different font families under <prefer> section
 # This is a way to set preferred font and fall-back fonts
 
-###########################################
-###########################################
-
-##### SHELL
-echo $SHELL # To check current shell
-# Did basic research of bash vs zsh vs fish and felt like zsh was the right one for me. Also, fish isn't POSIX
-# compliant. bash and zsh are mostly compatible with each other, but fish isn't.
-# sudo apt install zsh
-
-# https://itsfoss.com/zsh-ubuntu/
-sudo apt install -y zsh fonts-font-awesome
-chsh -s $(which zsh) # sets zsh as default
-zsh
-# Looks like restarting terminal doesn't apply this change of default shell. But seems to work after a reboot.
 
 ###########################################
 ###########################################
