@@ -336,7 +336,7 @@ sudo dnf upgrade -y
 # reboot
 ######################################################
 
-flatpak install -y flathub com.jetbrains.PyCharm-Community
+# flatpak install -y flathub com.jetbrains.PyCharm-Community
 # flatpak run com.jetbrains.PyCharm-Community
 
 # dnf install
@@ -372,7 +372,7 @@ flatpak install -y flathub com.jetbrains.PyCharm-Community
 
 ######################################################
 
-# rEFERENCE: https://www.linuxcapable.com/install-clamav-on-fedora-linux/
+# Reference: https://www.linuxcapable.com/install-clamav-on-fedora-linux/
 sudo dnf upgrade --refresh # Refresh Fedora System Packages
 # sudo dnf install -y clamav clamav-daemon clamtk 
 sudo dnf install clamav clamd clamav-update clamtk #  Install ClamAV  and ClamTK GUI
