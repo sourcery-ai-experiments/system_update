@@ -112,6 +112,12 @@ git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 # But first verify without the -delete option like following:
 find . -name "*.bak" -type f
 
+# Copy above folders from patched-fonts dir into a new directory called "nerd_fonts" -> Delete all files that are
+# not either *.ttf or *.otf -> move the nerd_fonts directory to ~/.local/share/fonts:
+mkdir -p ~/.local/share/fonts # this fonts folder is absent by default
+cp ~/Downloads/nerd-fonts ~/.local/share/fonts/ -r
+rm ~/Downloads/nerd-fonts
+
 fc-cache -fr # clear font cache
 # sudo fc-cache -f -v # Find out difference
 fc-list | grep "JetBrains" # To check if jetbrains fond was installed successfully
