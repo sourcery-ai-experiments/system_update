@@ -116,6 +116,12 @@ sudo dnf update -y && sudo dnf upgrade --refresh -y
 
 ### Install software
 
+sudo dnf install -y gh
+
+# https://fedoramagazine.org/two-factor-authentication-ssh-fedora/
+# sudo dnf install -y google-authenticator
+
+
 # Install GNOME Tweaks
 sudo dnf install -y gnome-tweaks
 
@@ -164,7 +170,8 @@ sudo dnf install -y kdeconnectd
 sudo dnf install -y  vlc
 sudo dnf remove -y totem # Remove stock video player
 
-
+# PeaZip for archive management
+# https://peazip.github.io/peazip-linux.html
 
 # # Set up automatic updates: (Read more and see if there are any better alternatives before installing this)
 # sudo dnf install -y dnf-automatic
