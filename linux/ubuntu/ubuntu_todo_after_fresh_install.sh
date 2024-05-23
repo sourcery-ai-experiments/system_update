@@ -98,18 +98,12 @@ sudo ./install.sh
 cd ~/Downloads
 git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
 
-# JetBrainsMono
-# Meslo
-# Hack
-# RobotoMono
-# SourceCodePro
-# FiraCode
-# Noto
-# Inconsolata
-# CascadiaCode
-# MartianMono
-# Copy above folders from patched-fonts dir into a new directory called "nerd_fonts" -> Delete all files that are
-# not either *.ttf or *.otf -> move the nerd_fonts directory to ~/.local/share/fonts
+
+
+# [nbhirud@nbFedora]~/Downloads/nerd-fonts% ls
+# AnonymousPro     CascadiaCode  CodeNewRoman     DejaVuSansMono  FiraCode  Gohu  HeavyData  IBMPlexMono  InconsolataGo   JetBrainsMono   Meslo   Mononoki              Noto          ProFont      RobotoMono     SpaceMono  Tinos   UbuntuMono
+# BigBlueTerminal  CascadiaMono  ComicShannsMono  EnvyCodeR       FiraMono  Hack  Hermit     Inconsolata  InconsolataLGC  LiberationMono  Monoid  NerdFontsSymbolsOnly  OpenDyslexic  ProggyClean  SourceCodePro  Terminus   Ubuntu  UbuntuSans
+# [nbhirud@nbFedora]~/Downloads/nerd-fonts% 
 
 # To delete unnecessary files, run the following:
 # find . -name "*.md" -type f -delete
