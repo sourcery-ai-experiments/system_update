@@ -30,6 +30,37 @@ source .zshrc
 # echo 'fastestmirror=1' | sudo tee -a /etc/dnf/dnf.conf
 # echo 'max_parallel_downloads=10' | sudo tee -a /etc/dnf/dnf.conf
 
+sudo dnf update -y && sudo dnf upgrade --refresh -y
+
+#######################################################
+
+# Get this repo
+which git || sudo dnf install -y git # check if a package is already installed to avoid unnecessary operations
+mkdir -p ~/nb
+mkdir -p ~/nb/CodeProjects
+cd ~/nb/CodeProjects
+git clone https://github.com/nbhirud/system_update.git
+gedit system_update/linux/ubuntu/ubuntu_todo_after_fresh_install.sh
+
+#######################################################
+
+cd ~/nb/CodeProjects
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts.git
+
+# delete using script
+
+#######################################################
+
+
+#######################################################
+
+#######################################################
+
+#######################################################
+
+#######################################################
+
+
 # Enable RPM Fusion
 # https://rpmfusion.org/Configuration
 
