@@ -45,3 +45,13 @@ archinstall
 
 ## Save configuration (to create a re-usable config - optional), then Install
 
+
+
+
+##### Notes
+# pcmanfm - a file manager
+# dmenu - a run launcher 
+# Terminal emulator alacritty is installed by default 
+
+
+
