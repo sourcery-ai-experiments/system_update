@@ -63,6 +63,7 @@ winget install vscodium
 
 # Download latest important drivers (For dell XPS - make sure to get wifi driver)
 # Download the latest antivirus installer (ideally offline)
+# Download MS Office installer
 
 
 # Create Win10 bootable USB
