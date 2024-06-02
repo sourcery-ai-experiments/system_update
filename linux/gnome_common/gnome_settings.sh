@@ -18,6 +18,25 @@
 # https://blog.cloudflare.com/welcome-hidden-resolver/
 
 
+
+########################
+
+## HTTPS (DoH) Servers in this order:
+## Setup on Router and/or PC
+# https://security.cloudflare-dns.com/dns-query
+# https://dns.quad9.net/dns-query
+# https://cloudflare-dns.com/dns-query
+
+########################
+
+## Time servers
+# time.cloudflare.com
+# time.nist.gov
+# time-nw.nist.gov
+# pool.ntp.org
+
+########################
+
 # Network -> Click the gear box next to the connection in use -> IPV6 tab -> "IPV6 Method" = Disabled (reduce attack surface area unless explicitly needed)
 
 # Appearance -> choose dark/light mode and background. Also choose color that matches the background
