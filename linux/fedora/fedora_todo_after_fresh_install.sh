@@ -421,6 +421,50 @@ crontab -e
 
 
 
+# Configure using - https://docs.clamav.net/manual/Usage/Configuration.html
+# TLDR:
+
+# Generate config files:
+clamconf -g freshclam.conf > freshclam.conf
+clamconf -g clamd.conf > clamd.conf
+clamconf -g clamav-milter.conf > clamav-milter.conf
+
+# Create log files:
+sudo touch /var/log/freshclam.log
+sudo chmod 600 /var/log/freshclam.log
+sudo chown clamupdate /var/log/freshclam.log
+
+sudo touch /var/log/clamav.log
+sudo chmod 600 /var/log/clamav.log
+sudo chown clamscan /var/log/clamav.log
+
+# Configurations:
+
+## freshclam
+# Do these configs in ~/freshclam.conf
+# LogFileMaxSize 20M
+# LogTime yes
+# LogRotate yes
+# UpdateLogFile /var/log/freshclam.log
+# DatabaseOwner clamupdate
+# NotifyClamd yes
+
+## clamd
+# Do these configs in ~/clamd.conf 
+# TODO - find correct path (/etc/clamav/clamd.conf ?)
+# Comment the "Example"
+# LogFile /var/log/clamav.log
+# LogFileMaxSize 20M
+# LogTime yes
+# LogRotate yes
+# ExitOnOOM yes # Not sure if this is a good thing to do
+# User clamscan
+# DetectPUA yes
+# TLDR of - https://docs.clamav.net/manual/OnAccess.html
+# OnAccessIncludePath /home # Figure out if this is the best option
+# OnAccessExcludeUname clamscan
+# OnAccessPrevention yes
+# OnAccessDisableDDD yes
 
 ######################################################
 
