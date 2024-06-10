@@ -102,7 +102,16 @@ sudo fwupdmgr update
 
 
 # Install relavent Nvidia/AMD GPU drivers 
-# Search and install based on system
+# https://itsfoss.com/install-nvidia-drivers-fedora/
+# Check if you have nvidia card:
+/sbin/lspci | grep -e VGA
+/sbin/lspci | grep -e 3D
+# Search and install based on system - Following is for recent systems:
+sudo dnf update -y # and reboot if you are not on the latest kernel
+sudo dnf install akmod-nvidia # rhel/centos users can use kmod-nvidia instead
+sudo dnf install xorg-x11-drv-nvidia-cuda #optional for cuda/nvdec/nvenc support
+modinfo -F version nvidia
+# Also see: https://www.nvidia.com/content/DriverDownloads/confirmation.php?url=/XFree86/Linux-x86_64/550.90.07/NVIDIA-Linux-x86_64-550.90.07.run&lang=us&type=geforcem
 
 
 sudo dnf update -y && sudo dnf upgrade --refresh -y
