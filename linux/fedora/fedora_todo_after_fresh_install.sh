@@ -157,7 +157,7 @@ sudo dnf install -y librewolf
 sudo dnf isntall -y dnfdragora
 
 # Speeds up opening of most used apps (avoid on low end or low RAM PCs)
-sudo dnf install -y preload 
+# sudo dnf install -y preload 
 # sudo dnf copr enable elxreno/preload -y && sudo dnf install preload -y
 
 # To connect phone and PC
@@ -247,7 +247,7 @@ sudo dnf install codium
 # https://support.torproject.org/rpm/
 
 
-nano /etc/yum.repos.d/tor.repo
+sudo nano /etc/yum.repos.d/tor.repo
 
 ## Paste the following:
 # [tor]
@@ -258,7 +258,7 @@ nano /etc/yum.repos.d/tor.repo
 # gpgkey=https://rpm.torproject.org/fedora/public_gpg.key
 # cost=100
 
-dnf install tor -y
+sudo dnf install tor -y
 
 sudo nano /etc/tor/torrc
 ## Paste the following, and modify as necessary:
@@ -432,11 +432,13 @@ crontab -e
 
 
 #################################################################
-# Custom linux aliases - add to ~/.zshrc
+# Added by nbhirud manually:
 #################################################################
 
+### Custom linux aliases - add to ~/.zshrc
+
 # Application shortcuts:
-alias codium="flatpak run com.vscodium.codium "
+# alias codium="flatpak run com.vscodium.codium "
 
 # Update/Upgrade related:
 alias nbupdate=". torsocks off && sudo dnf update -y && sudo dnf upgrade --refresh -y && flatpak update -y && sudo freshclam && omz update -y && . torsocks on"
@@ -445,6 +447,9 @@ alias nbreload="systemctl daemon-reload && source ~/.zshrc"
 alias nbclean="dnf clean -y all && flatpak uninstall --unused"
 alias nbtoron=". torsocks on"
 alias nbtoroff=". torsocks off"
+
+### Stuff other than aliases:
+. torsocks on
 
 #################################################################
 
