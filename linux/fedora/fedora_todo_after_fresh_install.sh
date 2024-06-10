@@ -102,7 +102,16 @@ sudo fwupdmgr update
 
 
 # Install relavent Nvidia/AMD GPU drivers 
-# Search and install based on system
+# https://itsfoss.com/install-nvidia-drivers-fedora/
+# Check if you have nvidia card:
+/sbin/lspci | grep -e VGA
+/sbin/lspci | grep -e 3D
+# Search and install based on system - Following is for recent systems:
+sudo dnf update -y # and reboot if you are not on the latest kernel
+sudo dnf install akmod-nvidia # rhel/centos users can use kmod-nvidia instead
+sudo dnf install xorg-x11-drv-nvidia-cuda #optional for cuda/nvdec/nvenc support
+modinfo -F version nvidia
+# Also see: https://www.nvidia.com/content/DriverDownloads/confirmation.php?url=/XFree86/Linux-x86_64/550.90.07/NVIDIA-Linux-x86_64-550.90.07.run&lang=us&type=geforcem
 
 
 sudo dnf update -y && sudo dnf upgrade --refresh -y
@@ -148,7 +157,7 @@ sudo dnf install -y librewolf
 sudo dnf isntall -y dnfdragora
 
 # Speeds up opening of most used apps (avoid on low end or low RAM PCs)
-sudo dnf install -y preload 
+# sudo dnf install -y preload 
 # sudo dnf copr enable elxreno/preload -y && sudo dnf install preload -y
 
 # To connect phone and PC
@@ -238,7 +247,7 @@ sudo dnf install codium
 # https://support.torproject.org/rpm/
 
 
-nano /etc/yum.repos.d/tor.repo
+sudo nano /etc/yum.repos.d/tor.repo
 
 ## Paste the following:
 # [tor]
@@ -249,7 +258,7 @@ nano /etc/yum.repos.d/tor.repo
 # gpgkey=https://rpm.torproject.org/fedora/public_gpg.key
 # cost=100
 
-dnf install tor -y
+sudo dnf install tor -y
 
 sudo nano /etc/tor/torrc
 ## Paste the following, and modify as necessary:
@@ -412,6 +421,50 @@ crontab -e
 
 
 
+# Configure using - https://docs.clamav.net/manual/Usage/Configuration.html
+# TLDR:
+
+# Generate config files:
+clamconf -g freshclam.conf > freshclam.conf
+clamconf -g clamd.conf > clamd.conf
+clamconf -g clamav-milter.conf > clamav-milter.conf
+
+# Create log files:
+sudo touch /var/log/freshclam.log
+sudo chmod 600 /var/log/freshclam.log
+sudo chown clamupdate /var/log/freshclam.log
+
+sudo touch /var/log/clamav.log
+sudo chmod 600 /var/log/clamav.log
+sudo chown clamscan /var/log/clamav.log
+
+# Configurations:
+
+## freshclam
+# Do these configs in ~/freshclam.conf
+# LogFileMaxSize 20M
+# LogTime yes
+# LogRotate yes
+# UpdateLogFile /var/log/freshclam.log
+# DatabaseOwner clamupdate
+# NotifyClamd yes
+
+## clamd
+# Do these configs in ~/clamd.conf 
+# TODO - find correct path (/etc/clamav/clamd.conf ?)
+# Comment the "Example"
+# LogFile /var/log/clamav.log
+# LogFileMaxSize 20M
+# LogTime yes
+# LogRotate yes
+# ExitOnOOM yes # Not sure if this is a good thing to do
+# User clamscan
+# DetectPUA yes
+# TLDR of - https://docs.clamav.net/manual/OnAccess.html
+# OnAccessIncludePath /home # Figure out if this is the best option
+# OnAccessExcludeUname clamscan
+# OnAccessPrevention yes
+# OnAccessDisableDDD yes
 
 ######################################################
 
@@ -423,11 +476,13 @@ crontab -e
 
 
 #################################################################
-# Custom linux aliases - add to ~/.zshrc
+# Added by nbhirud manually:
 #################################################################
 
+### Custom linux aliases - add to ~/.zshrc
+
 # Application shortcuts:
-alias codium="flatpak run com.vscodium.codium "
+# alias codium="flatpak run com.vscodium.codium "
 
 # Update/Upgrade related:
 alias nbupdate=". torsocks off && sudo dnf update -y && sudo dnf upgrade --refresh -y && flatpak update -y && sudo freshclam && omz update -y && . torsocks on"
@@ -436,6 +491,9 @@ alias nbreload="systemctl daemon-reload && source ~/.zshrc"
 alias nbclean="dnf clean -y all && flatpak uninstall --unused"
 alias nbtoron=". torsocks on"
 alias nbtoroff=". torsocks off"
+
+### Stuff other than aliases:
+. torsocks on
 
 #################################################################
 
